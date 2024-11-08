@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5765894502137745975}
   m_Layer: 0
-  m_Name: LeftHand_Attachment
+  m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -776,7 +776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4545081555688417364}
   m_Layer: 0
-  m_Name: RightHand_Attachment
+  m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,7 +997,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6858235263484290489}
   m_Layer: 0
-  m_Name: RightHand
+  m_Name: RightWrist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1206,7 +1206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3352657627758502663}
   m_Layer: 0
-  m_Name: LeftHand
+  m_Name: LeftWrist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

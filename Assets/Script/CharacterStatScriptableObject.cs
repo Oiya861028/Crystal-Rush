@@ -11,30 +11,30 @@ public class CharacterStatScriptableObject:ScriptableObject{
     //Special Features
     public GameObject CharacterModel; 
 
-    public Transform getWeaponAttachPoint(bool isLeftHand){
+    public GameObject getWeaponAttachPoint(bool isLeftHand){
         if(isLeftHand){
-            return RecursiveFindChild(CharacterModel.transform, "LeftHand");
+            return RecursiveFindChild(CharacterModel, "LeftHand");
         }
         else {
-            return RecursiveFindChild(CharacterModel.transform, "RightHand");
+            return RecursiveFindChild(CharacterModel, "RightHand");
         }
     }
-    private Transform RecursiveFindChild(Transform parent, string childName) {
-         foreach (Transform child in parent)
-    {
-        if(child.name == childName)
+    private GameObject RecursiveFindChild(GameObject parent, string childName) {
+        foreach (Transform child in parent.transform)
         {
-            return child;
-        }
-        else
-        {
-            Transform found = RecursiveFindChild(child, childName);
-            if (found != null)
+            if(child.name == childName)
             {
-                    return found;
+                return child.gameObject;
+            }
+            else
+            {
+                GameObject found = RecursiveFindChild(child.gameObject, childName);
+                if (found != null)
+                {
+                        return found;
+                }
             }
         }
-    }
-    return null;
+        return null;
     }
 }

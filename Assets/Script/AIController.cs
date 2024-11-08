@@ -8,6 +8,7 @@ public class AIController : MonoBehaviour
 {
     //References
     [SerializeField] private CharacterStatScriptableObject AIStat;//Stat Data Bank for Weak AI
+    
     [SerializeField] private Transform player; //player location
     
     [SerializeField] private float attackRange = 5;
@@ -16,15 +17,13 @@ public class AIController : MonoBehaviour
     [Space]
     [SerializeField] private bool LeftHand = true; //Which hand to attach weapon to
 
-
+    GameObject AIModel;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject AIModel = Instantiate(AIStat.CharacterModel, transform);
+        AIModel = Instantiate(AIStat.CharacterModel, transform);
         //Get Weapon_Attach_Point
-        Transform Weapon_Attach_Point = AIStat.getWeaponAttachPoint(LeftHand);
-        
-        GameObject weapon = Instantiate(WeaponStat.WeaponModel, Weapon_Attach_Point.position, Weapon_Attach_Point.rotation);
+        GameObject Weapon = Instantiate(WeaponStat.WeaponModel, getWeaponAttachPoint(LeftHand).transform);
         lastBulletTime = Time.deltaTime;
     }
 
@@ -75,5 +74,30 @@ public class AIController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.position, AIStat.Speed * Time.deltaTime);
         transform.LookAt(player);
     }
-    
+    GameObject getWeaponAttachPoint(bool isLeftHand){
+        if(isLeftHand){
+            return RecursiveFindChild(AIModel, "LeftHand");
+        }
+        else {
+            return RecursiveFindChild(AIModel, "RightHand");
+        }
+    }
+    GameObject RecursiveFindChild(GameObject parent, string childName) {
+        foreach (Transform child in parent.transform)
+        {
+            if(child.name == childName)
+            {
+                return child.gameObject;
+            }
+            else
+            {
+                GameObject found = RecursiveFindChild(child.gameObject, childName);
+                if (found != null)
+                {
+                        return found;
+                }
+            }
+        }
+        return null;
+    }
 }
