@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
 
@@ -13,15 +14,16 @@ public class AIController : MonoBehaviour
     [SerializeField] private float chaseRange = 10;
     [SerializeField] private Weapon WeaponStat;
     [Space]
-    private float lastBulletTime;
-    private float playerDistance;
+    [SerializeField] private bool LeftHand = true; //Which hand to attach weapon to
+
 
     // Start is called before the first frame update
     void Start()
     {
         GameObject AIModel = Instantiate(AIStat.CharacterModel, transform);
         //Get Weapon_Attach_Point
-        Transform Weapon_Attach_Point = AIStat.getWeaponAttachPoint();
+        Transform Weapon_Attach_Point = AIStat.getWeaponAttachPoint(LeftHand);
+        
         GameObject weapon = Instantiate(WeaponStat.WeaponModel, Weapon_Attach_Point.position, Weapon_Attach_Point.rotation);
         lastBulletTime = Time.deltaTime;
     }
@@ -50,6 +52,10 @@ public class AIController : MonoBehaviour
         }
         return false;
     }
+    //Counter variables
+    private float lastBulletTime;
+    private float sprintCD;
+    private float playerDistance;
     void AttackPlayer()
     {
         if(Time.deltaTime-lastBulletTime > WeaponStat.reloadTime){
@@ -65,7 +71,9 @@ public class AIController : MonoBehaviour
     }
     void chasePlayer(){
         //move toward player
+        
         transform.position = Vector3.MoveTowards(transform.position, player.position, AIStat.Speed * Time.deltaTime);
+        transform.LookAt(player);
     }
     
 }
