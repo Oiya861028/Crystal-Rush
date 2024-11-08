@@ -11,7 +11,8 @@ public class CharacterStatScriptableObject:ScriptableObject{
     //Special Features
     public GameObject CharacterModel; 
 
-    public Transform getWeaponAttachPoint(){
-        return CharacterModel.transform.Find("Weapon_Attachment_Point");
+    public Transform getWeaponAttachPoint(bool isLeftHand){
+        if(isLeftHand) return CharacterModel.transform.Find("LeftHand");
+        return CharacterModel.transform.Find("RightHand");
     }
 }

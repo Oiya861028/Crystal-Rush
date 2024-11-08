@@ -503,7 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8685629972404367359}
   m_Layer: 0
-  m_Name: RightHand_Dummy
+  m_Name: RightHand_Attachment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,7 +1128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6680492617223001526}
   m_Layer: 0
-  m_Name: LeftHand_Dummy
+  m_Name: LeftHand_Attachment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
