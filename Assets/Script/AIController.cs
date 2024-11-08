@@ -33,23 +33,40 @@ public class AIController : MonoBehaviour
         playerDistance = Vector3.Distance(transform.position, player.position);
         if (playerDistance < attackRange)
         {
-            if(checkIfPlayerSeen()) AttackPlayer();
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, (player.position - transform.position).normalized, out hit, attackRange))
+            {
+                if (hit.transform == player)
+                {
+                    AttackPlayer();
+                }
+            }
         }
-        if (playerDistance < chaseRange) {
-            chasePlayer();
+        else if (playerDistance < chaseRange) {
+            ChasePlayer();
         }
 
     }
-    private bool checkIfPlayerSeen() {
+    private bool isPlayerBehindWall()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, (player.position - transform.position).normalized, out hit, attackRange))
+        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+
+        // Define a layer mask for walls (assuming walls are on a specific layer)
+        int wallLayerMask = LayerMask.GetMask("Wall");
+
+        // Perform the raycast
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, attackRange, wallLayerMask))
         {
+            // Check if the ray hit the player
             if (hit.transform == player)
             {
-                return true;
+                return false; // Player is not behind a wall
             }
         }
-        return false;
+
+        // If the ray hits something else or nothing, the player is behind a wall
+        return true;
     }
     //Counter variables
     private float lastBulletTime;
@@ -57,6 +74,8 @@ public class AIController : MonoBehaviour
     private float playerDistance;
     void AttackPlayer()
     {
+        Debug.Log(Time.time);
+        transform.LookAt(player);
         if(Time.deltaTime-lastBulletTime > WeaponStat.reloadTime){
             GameObject projectile = Instantiate(WeaponStat.projectileModel.model, transform.position, Quaternion.identity);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
@@ -68,7 +87,7 @@ public class AIController : MonoBehaviour
             lastBulletTime+= Time.deltaTime;
         }
     }
-    void chasePlayer(){
+    void ChasePlayer(){
         //move toward player
         
         transform.position = Vector3.MoveTowards(transform.position, player.position, AIStat.Speed * Time.deltaTime);
