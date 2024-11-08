@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e57f03461ed978449dafe3bbc87ab64, type: 3}
+  m_Name: Water Gun
+  m_EditorClassIdentifier: 
+  damage: 50
+  reloadTime: 5
+  attackSound: {fileID: 0}
+  bulletSpeed: 5
+  WeaponModel: {fileID: 100000, guid: e42a245ddc40f744994b4b96b407ec47, type: 3}
+  projectileModel: {fileID: 11400000, guid: bb22d364502b9b640bfbe93b8967bb76, type: 2}
