@@ -47,27 +47,7 @@ public class AIController : MonoBehaviour
         }
 
     }
-    private bool isPlayerBehindWall()
-    {
-        RaycastHit hit;
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-
-        // Define a layer mask for walls (assuming walls are on a specific layer)
-        int wallLayerMask = LayerMask.GetMask("Wall");
-
-        // Perform the raycast
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, attackRange, wallLayerMask))
-        {
-            // Check if the ray hit the player
-            if (hit.transform == player)
-            {
-                return false; // Player is not behind a wall
-            }
-        }
-
-        // If the ray hits something else or nothing, the player is behind a wall
-        return true;
-    }
+    
     //Counter variables
     private float lastBulletTime;
     private float sprintCD;
