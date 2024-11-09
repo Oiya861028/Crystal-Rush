@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+
 //The purpose of this script is to spawn multiple AI across the map and equip them with weapon
 public class AISpawner : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class AISpawner : MonoBehaviour
     private GameObject[] AIModelInstances;
     
     
-    void Start()
+    void Awake()
     {
         //Instantiate bots and 
         AIModelInstances = new GameObject[10];

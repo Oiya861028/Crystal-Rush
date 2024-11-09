@@ -5,9 +5,11 @@ using UnityEngine;
 public class BasicStatScriptableObject:ScriptableObject{
     //Basic Stats
     public float Health;
-    public float Speed;
-    public float SprintSpeed;
+    public float WalkingSpeed;
+    public float RunningSpeed;
     public float JumpForce;
     //Special Features
     public GameObject Model; 
+    public float ChaseDistance;
+    public float AttackDistance;
 }
