@@ -10,6 +10,6 @@ public class BasicStatScriptableObject:ScriptableObject{
     public float JumpForce;
     //Special Features
     public GameObject Model; 
-    public float ChaseDistance;
+    public float DetectionDistance;
     public float AttackDistance;
 }

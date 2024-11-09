@@ -404,7 +404,6 @@ GameObject:
   - component: {fileID: 4718551473248088567}
   - component: {fileID: 9049018878763889552}
   - component: {fileID: 3376057604747872371}
-  - component: {fileID: 7970940443873200542}
   m_Layer: 0
   m_Name: mini simple skeleton demo
   m_TagString: Untagged
@@ -447,7 +446,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AIStat: {fileID: 11400000, guid: f8dc3328dd3ec0f448ae20657d1fc8ad, type: 2}
-  player: {fileID: 0}
   WeaponStat: {fileID: 11400000, guid: 3e0c9a975a6751648ab36d71f57537cf, type: 2}
 --- !u!95 &1116371902028168016
 Animator:
@@ -557,32 +555,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!143 &7970940443873200542
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696834749189059949}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1818926580354158373
 GameObject:
   m_ObjectHideFlags: 0

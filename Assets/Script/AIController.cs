@@ -43,7 +43,7 @@ public class AIController : MonoBehaviour
         
 
         playerDistance = Vector3.Distance(transform.position, player.position);
-        if (playerDistance < AIStat.ChaseDistance)
+        if (playerDistance < AIStat.DetectionDistance)
         {
             AttackPlayer();
         }
