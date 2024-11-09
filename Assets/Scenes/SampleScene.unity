@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AIStat: {fileID: 11400000, guid: f8dc3328dd3ec0f448ae20657d1fc8ad, type: 2}
-  WeaponStat: {fileID: 11400000, guid: 3e0c9a975a6751648ab36d71f57537cf, type: 2}
+  WeaponStat: {fileID: 11400000, guid: b99b382a1c725bb468d60b0bce8d5932, type: 2}
   player: {fileID: 133749172}
   NumberOfAI: 10
   offSet: 22

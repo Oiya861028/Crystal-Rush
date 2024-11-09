@@ -13,18 +13,19 @@ public class AIController : MonoBehaviour
     [SerializeField] private Weapon WeaponStat;
     private Transform player; //player location
     private NavMeshAgent agent;
-    private static float GRAVITY = -9.81f;
+    private Animator animator;
     private Vector3 velocity;
     // Start is called before the first frame update
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
     { 
         
-
+        animator.SetFloat("Speed", agent.velocity.magnitude);
         playerDistance = Vector3.Distance(transform.position, player.position);
         if (playerDistance < AIStat.DetectionDistance)
         {
@@ -33,6 +34,7 @@ public class AIController : MonoBehaviour
         else if (playerDistance < AIStat.AttackDistance) {
             ChasePlayer();
         }
+
 
     }
     public void setPlayer(Transform p){

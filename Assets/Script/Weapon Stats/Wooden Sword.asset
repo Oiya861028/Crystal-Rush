@@ -16,5 +16,5 @@ MonoBehaviour:
   reloadTime: 1
   attackSound: {fileID: 0}
   bulletSpeed: 5
-  WeaponModel: {fileID: 919132149155446097, guid: 27f19f244afa43c43b7c5bff88b185bb, type: 3}
+  WeaponModel: {fileID: 2037921496895444295, guid: a8cc610235c43164cb7d9665673d0322, type: 3}
   projectileModel: {fileID: 0}
