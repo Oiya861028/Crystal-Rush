@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   Health: 10
-  Speed: 5
-  SprintSpeed: 10
+  WalkingSpeed: 5
+  RunningSpeed: 10
   JumpForce: 10
-  CharacterModel: {fileID: 1696834749189059949, guid: 4a46e821c58b5cd42b14eaab6d197266, type: 3}
+  Model: {fileID: 1696834749189059949, guid: 4a46e821c58b5cd42b14eaab6d197266, type: 3}
+  ChaseDistance: 10
+  AttackDistance: 10

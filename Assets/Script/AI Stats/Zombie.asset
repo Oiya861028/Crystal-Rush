@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8784590c2c7cc4d975b1920d6926fb, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  Health: 0
-  Speed: 0
-  SprintSpeed: 0
-  JumpForce: 0
-  CharacterModel: {fileID: 0}
+  Health: 100
+  WalkingSpeed: 0
+  RunningSpeed: 0
+  JumpForce: 10
+  Model: {fileID: 0}
+  ChaseDistance: 0
+  AttackDistance: 0

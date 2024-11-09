@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.Universal.Internal;
@@ -8,12 +9,12 @@ public class AIController : MonoBehaviour
     
     [SerializeField] private BasicStatScriptableObject AIStat;//Stat Data Bank for Weak AI
     
-    [SerializeField] private Transform player; //player location
     
     [SerializeField] private Weapon WeaponStat;
     private CharacterController Controller;
+    private Transform player; //player location
     private NavMeshAgent agent;
-    private static float GRAVITY = -9.81f;
+    // private static float GRAVITY = -9.81f;
     private Vector3 velocity;
     // Start is called before the first frame update
     void OnEnable() {
@@ -26,19 +27,20 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        // Check if the AI is grounded
-        if (!Controller.isGrounded)
-        {
-            // Apply gravity to the velocity
-            velocity.y += GRAVITY * Time.deltaTime;
-        }
-        else
-        {
-            // Reset the velocity when grounded
-            velocity.y = 0f;
-        }
-        // Move the object based on the calculated velocity
-        Controller.Move(velocity * Time.deltaTime);
+        // // Check if the AI is grounded
+        // if (!Controller.isGrounded)
+        // {
+        //     // Apply gravity to the velocity
+        //     velocity.y += GRAVITY * Time.deltaTime;
+        //     Controller.Move(velocity * Time.deltaTime);
+        // }
+        // else
+        // {
+        //     // Reset the velocity when grounded
+        //     velocity.y = 0f;
+        // }
+        // // Move the object based on the calculated velocity
+        
 
         playerDistance = Vector3.Distance(transform.position, player.position);
         if (playerDistance < AIStat.ChaseDistance)
@@ -50,14 +52,15 @@ public class AIController : MonoBehaviour
         }
 
     }
-    
+    public void setPlayer(Transform p){
+        player = p;
+    }
     //Counter variables
     private float lastBulletTime;
     private float sprintCD;
     private float playerDistance;
     void AttackPlayer()
     {
-        Debug.Log(Time.time);
         transform.LookAt(player);
         if(Time.deltaTime-lastBulletTime > WeaponStat.reloadTime){
             GameObject projectile = Instantiate(WeaponStat.projectileModel.model, transform.position, Quaternion.identity);
@@ -72,7 +75,8 @@ public class AIController : MonoBehaviour
     }
     void ChasePlayer(){
         //move toward player
-        transform.position = Vector3.MoveTowards(transform.position, player.position, AIStat.WalkingSpeed * Time.deltaTime);
+        agent.destination = player.position;
         transform.LookAt(player);
     }
+
 }
