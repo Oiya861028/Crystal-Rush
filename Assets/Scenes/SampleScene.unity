@@ -1088,7 +1088,7 @@ Transform:
   m_GameObject: {fileID: 1534686548}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.39, y: 0, z: -18}
+  m_LocalPosition: {x: 15.39, y: 1, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2045,6 +2045,7 @@ GameObject:
   - component: {fileID: 5483458409467006153}
   - component: {fileID: 5483458409466203369}
   - component: {fileID: 5483458409465237033}
+  - component: {fileID: 5483458409467433194}
   m_Layer: 0
   m_Name: SM_Buildings_Stairs_1x3_01
   m_TagString: Untagged
@@ -2052,6 +2053,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &5483458409467433194
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483458409467433193}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 7ce50dc06d7bb62448b532080fd35371, type: 3}
 --- !u!4 &7745068213478762353
 Transform:
   m_ObjectHideFlags: 0
@@ -2078,6 +2101,7 @@ GameObject:
   - component: {fileID: 7745068213478762353}
   - component: {fileID: 7745068213480089425}
   - component: {fileID: 7745068213481186705}
+  - component: {fileID: 7745068213481186706}
   m_Layer: 0
   m_Name: SM_Buildings_Stairs_1x1_01
   m_TagString: Untagged
@@ -2135,6 +2159,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7745068213481186706
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745068213478996817}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 68472b6ee0a878143b1d10804a97dd75, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

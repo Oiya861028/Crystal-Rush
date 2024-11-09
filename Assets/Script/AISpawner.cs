@@ -18,7 +18,7 @@ public class AISpawner : MonoBehaviour
         //Instantiate bots and 
         AIModelInstances = new GameObject[10];
         for(int i = 0; i < NumberOfAI; i++) {
-            Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 1, Random.Range(0f, offSet));
+            Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 0, Random.Range(0f, offSet));
             AIModelInstances[i] = Instantiate(AIStat.Model, (transform.position + SpawnOffset), Quaternion.identity);
             AIModelInstances[i].GetComponent<AIController>().setPlayer(player);
             //Get Weapon_Attach_Point
