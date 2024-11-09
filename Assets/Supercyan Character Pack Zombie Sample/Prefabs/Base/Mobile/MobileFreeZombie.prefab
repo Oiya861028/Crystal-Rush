@@ -18,11 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a67006042548d954e9e630c46922dc39, type: 2}
     - target: {fileID: 4801606789174179774, guid: 86954bd586b5cbc4380a87a05acbf57f, type: 3}
       propertyPath: m_Name
-      value: RightHand_Attachment
+      value: RightHand
       objectReference: {fileID: 0}
     - target: {fileID: 5785629820623236760, guid: 86954bd586b5cbc4380a87a05acbf57f, type: 3}
       propertyPath: m_Name
-      value: LeftHand_Attachment
+      value: LeftHand
       objectReference: {fileID: 0}
     - target: {fileID: 6930373436760084395, guid: 86954bd586b5cbc4380a87a05acbf57f, type: 3}
       propertyPath: m_Name

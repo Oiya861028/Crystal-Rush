@@ -1,13 +1,15 @@
 using System;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
-
+//This script has been outdated, AIController will be broken down into their respective components
+//More specifically, this script will be broken into AISpawner and AIBehaviors, which the second is attached to each individual AI
 public class AIController : MonoBehaviour
 {
     //References
-    [SerializeField] private CharacterStatScriptableObject AIStat;//Stat Data Bank for Weak AI
+    [SerializeField] private BasicStatScriptableObject AIStat;//Stat Data Bank for Weak AI
     
     [SerializeField] private Transform player; //player location
     
@@ -21,7 +23,7 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AIModel = Instantiate(AIStat.CharacterModel, transform);
+        AIModel = Instantiate(AIStat.Model, transform.position, quaternion.identity);
         //Get Weapon_Attach_Point
         GameObject Weapon = Instantiate(WeaponStat.WeaponModel, getWeaponAttachPoint(LeftHand).transform);
         lastBulletTime = Time.deltaTime;
