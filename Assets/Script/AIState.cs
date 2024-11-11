@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public enum AIStateId{
-    ChasePlayer
-}
 
+    Patrol, 
+    Chase, 
+    Attack, 
+    Flee
+}
 public interface AIState{
     AIStateId GetId();
     void Enter(AIAgent agent);

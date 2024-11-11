@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class AIAgent : MonoBehaviour
 {
-    public AIStateMachine stateMachine;
+    public FSM stateMachine;
     public AIStateId initialState;
-    // Start is called before the first frame update
     void Start()
     {
-        stateMachine = new AIStateMachine(this);
+        stateMachine = new FSM(this);
+        stateMachine.RegisterState(new AIPatrolState());
+        stateMachine.RegisterState(new AIChaseState());
+        stateMachine.RegisterState(new AIAttackState());
+        stateMachine.RegisterState(new AIFleeState());
         stateMachine.ChangeState(initialState);
     }
-
-    // Update is called once per frame
     void Update()
     {
         stateMachine.Update();
