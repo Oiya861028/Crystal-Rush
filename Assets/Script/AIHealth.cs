@@ -5,11 +5,11 @@ public class AIHealth : MonoBehaviour
 {
     public float health = 10f;
     public Slider healthBar;
-    private NavMeshAgent agent;
+    private UnityEngine.AI.NavMeshAgent agent;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         healthBar.maxValue = health;
         healthBar.value = health;
     }
