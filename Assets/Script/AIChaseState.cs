@@ -6,10 +6,10 @@ public class AIChaseState : AIState
     public Transform player;
     public float chaseRange = 10f;
     public float speed = 3f;
-    AIStateId GetId(){
+    public AIStateId GetId(){
         return AIStateId.Chase;
     }
-    void Update(AIAgent agent){
+    public void Update(AIAgent agent){
         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
     }
 }

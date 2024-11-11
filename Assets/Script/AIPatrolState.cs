@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class AIPatrolState : AIState
 {
-    AIStateId GetId(){
+    public AIStateId GetId(){
         return AIStateId.Patrol;
     }
     public List<Transform> waypoints;
@@ -19,7 +19,7 @@ public class AIPatrolState : AIState
             targetPosition =  waypoints[currentWaypoint].position;
         }
     }
-    void Update(){
+    public void Update(AIAgent agent){
         MoveTowardsTarget();
         RaycastHit hit;
         Vector3 forward = transform.TransformDirection(Vector3.forward);

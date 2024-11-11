@@ -12,10 +12,10 @@ public class AIAttackState : AIState
 
     private float attackCooldown = 1f;
     private float lastAttackTime = 0f;
-    AIStateId GetId(){
+    public AIStateId GetId(){
         return AIStateId.Attack;
     }
-    void Update(AIAgent agent){
+    public void Update(AIAgent agent){
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, attackRange))
@@ -30,8 +30,8 @@ public class AIAttackState : AIState
             }
         }
     }
-     void AttackPlayer()
-{
+    void AttackPlayer()
+    {
     Vector3 direction = (player.position - transform.position).normalized;
     GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
     Collider aiCollider = GetComponent<Collider>();
