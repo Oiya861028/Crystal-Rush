@@ -943,7 +943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591740774532846476}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.36413595, y: 0, z: 0, w: 0.9313458}
+  m_LocalRotation: {x: -0.36414063, y: 0.00000005003823, z: 0.000000019564148, w: 0.93134403}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1353,7 +1353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3135703173556382795}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3857388, y: 0, z: 0, w: 0.9226081}
+  m_LocalRotation: {x: -0.3857388, y: -0.000000008009219, z: -0.0000000033486214, w: 0.9226081}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4780,7 +4780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4088960166849398973}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.4070355, y: 0, z: 0, w: 0.91341233}
+  m_LocalRotation: {x: -0.40703553, y: -0.000000011275649, z: -0.0000000050246634, w: 0.9134124}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5095,6 +5095,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzleFlash: {fileID: 985863146}
+  hitEffect: {fileID: 8005153817822377796}
+  TraceEffect: {fileID: 7849123141772220035, guid: 036b7a78a89418743abf45939e528bf9, type: 3}
   RaycastOrigin: {fileID: 539105221}
   RaycastDestination: {fileID: 929482023}
   isFiring: 0
@@ -5258,8 +5260,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7917132998607261390}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -2.1162758, y: 0.09000003, z: 3.358345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5267,7 +5269,7 @@ Transform:
   - {fileID: 7911409297525039030}
   - {fileID: 7911374281338041770}
   m_Father: {fileID: 5350307747390152857}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7916897495441962288
 GameObject:
   m_ObjectHideFlags: 0
@@ -6172,7 +6174,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
@@ -19612,7 +19614,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -20245,7 +20247,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
