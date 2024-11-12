@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -2226451875165639527}
   - component: {fileID: 9032057060666874477}
   - component: {fileID: -7024985986966882606}
-  - component: {fileID: 4996828216015524239}
   m_Layer: 0
   m_Name: crystal_17_2
   m_TagString: Untagged
@@ -207,26 +206,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 1
---- !u!136 &4996828216015524239
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000012006197310}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.5728316
-  m_Height: 5.1840124
-  m_Direction: 1
-  m_Center: {x: -0.55656254, y: 2.346941, z: 1.3663684}
+  detectRange: 3
