@@ -32,7 +32,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SkeletonController
+  m_Name: AIAnimation
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Speed
@@ -63,7 +63,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: c4a40c49ef52b1b43b51c16ed33a3f33, type: 3}
+    m_Motion: {fileID: 7400008, guid: 080945c46afd34f3ebc364c1696e6678, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -71,24 +71,24 @@ BlendTree:
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: ecaccc11791f54c4e883348435e769f2, type: 3}
-    m_Threshold: 0.33333334
+    m_Motion: {fileID: 7400000, guid: 13caa80bbe9b34403bda844d1694d394, type: 3}
+    m_Threshold: 1.513128
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 370a08442c304594187339ea2bd0cf7e, type: 3}
-    m_Threshold: 0.6666667
+    m_Motion: {fileID: 7400000, guid: fdc39e3202ebc4d4a8a473fd95fcff55, type: 3}
+    m_Threshold: 3.6298022
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 65326f21cced4f74581764734f7b12b2, type: 3}
-    m_Threshold: 1
+    m_Motion: {fileID: 7400000, guid: 7fa1f9e8c2e4188478cbd5a152ce790e, type: 3}
+    m_Threshold: 6.6578736
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -97,8 +97,8 @@ BlendTree:
   m_BlendParameter: Speed
   m_BlendParameterY: Blend
   m_MinThreshold: 0
-  m_MaxThreshold: 1
-  m_UseAutomaticThresholds: 1
+  m_MaxThreshold: 6.6578736
+  m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
 --- !u!1107 &6973382114411290042
