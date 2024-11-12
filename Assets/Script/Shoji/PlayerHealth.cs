@@ -14,7 +14,9 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Player has died!");
-            // Implement player death logic, like restarting the game or showing a game over screen.
+
+            // Load the losing scene
+            FindObjectOfType<SceneController>().LoadLosingScene();
         }
     }
 }

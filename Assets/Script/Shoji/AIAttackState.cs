@@ -8,7 +8,7 @@ public class AIAttackState : AIState
     public GameObject projectilePrefab;
     public float projectileSpeed = 10f;
     public float damage = 1f;
-    private float health = 10f;
+    //private float health = 10f;
 
     private float attackCooldown = 1f;
     private float lastAttackTime = 0f;
