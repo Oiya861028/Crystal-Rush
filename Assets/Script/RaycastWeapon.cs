@@ -21,6 +21,7 @@ public class RaycastWeapon : MonoBehaviour
     public Transform RaycastDestination;
     public bool isFiring = false;
     public int fireRate = 30;
+    public int dmg = 10;
     public float bulletSpeed = 1000.0f;
     public float bulletDrop = 0.0f;
     public float maxLifeTime = 3.0f;
@@ -92,6 +93,10 @@ public class RaycastWeapon : MonoBehaviour
             bullet.time = maxLifeTime;
         } else{
             bullet.tracer.transform.position = end;
+        }
+        var hitBox = hitInfo.collider.GetComponent<HitBox>();
+        if(hitBox) {
+            hitBox.OnRaycastHit(this, Vector3.zero);
         }
     }
 
