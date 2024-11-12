@@ -5772,8 +5772,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967327025249383076}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.4070355, y: 0, z: 0, w: 0.91341233}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.40703535, y: 0, z: 0, w: 0.91341245}
+  m_LocalPosition: {x: 0, y: -0.000000029802322, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6368,7 +6368,7 @@ Transform:
   m_GameObject: {fileID: 2875498307044283328}
   serializedVersion: 2
   m_LocalRotation: {x: -0.4070355, y: -0, z: -0, w: 0.91341233}
-  m_LocalPosition: {x: 52.33, y: -0.17468739, z: 29.3732}
+  m_LocalPosition: {x: 0.38, y: 0.92431283, z: -0.6268015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6819,6 +6819,7 @@ MonoBehaviour:
   RaycastDestination: {fileID: 7145081732589713646}
   isFiring: 0
   fireRate: 30
+  dmg: 10
   bulletSpeed: 1000
   bulletDrop: 1
   maxLifeTime: 3
@@ -12470,8 +12471,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4748646412626598611}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3857388, y: 0, z: 0, w: 0.9226081}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.38573858, y: 0, z: 0, w: 0.92260814}
+  m_LocalPosition: {x: 0, y: -0.000000029802322, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12829,7 +12830,7 @@ Transform:
   m_GameObject: {fileID: 5241666841636815137}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: -1.2999992}
+  m_LocalPosition: {x: 0, y: 0.4, z: -1.3000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13939,7 +13940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7574653817362888488}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.36414063, y: 0, z: 0, w: 0.931344}
+  m_LocalRotation: {x: -0.36414045, y: 0, z: 0, w: 0.93134403}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33588,7 +33589,7 @@ GameObject:
   - component: {fileID: 6049033596061775788}
   - component: {fileID: 7154054021052169205}
   m_Layer: 0
-  m_Name: SM_Character_01_WithController
+  m_Name: Player Transform/Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33603,7 +33604,7 @@ Transform:
   m_GameObject: {fileID: 9105955694046385986}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 51.95, y: -1.099, z: 30}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
