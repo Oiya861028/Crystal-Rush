@@ -15,8 +15,8 @@ public class AIFleeState : AIState
 
     public void Update(AIAgent agent)
     {
-        Vector3 directionAwayFromPlayer = transform.position - player.position;
+        Vector3 directionAwayFromPlayer = agent.transform.position - player.position;
         directionAwayFromPlayer.Normalize();
-        transform.position += directionAwayFromPlayer * speed * Time.deltaTime;
+        agent.transform.position += directionAwayFromPlayer * speed * Time.deltaTime;
     }
 }

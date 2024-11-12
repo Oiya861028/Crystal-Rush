@@ -11,4 +11,5 @@ public enum AIStateId{
 public interface AIState{
     AIStateId GetId();
     void Update(AIAgent agent);
+
 }

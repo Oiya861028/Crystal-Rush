@@ -10,6 +10,6 @@ public class AIChaseState : AIState
         return AIStateId.Chase;
     }
     public void Update(AIAgent agent){
-        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        agent.transform.position = Vector3.MoveTowards(agent.transform.position, player.position, speed * Time.deltaTime);
     }
 }
