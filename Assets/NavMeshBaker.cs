@@ -6,9 +6,11 @@ using UnityEngine;
 public class NavMeshBaker : MonoBehaviour
 {
     NavMeshSurface navMeshSurface;
-    void OnEnable()
+    void Start()
     {
+        Debug.Log("Generating NavMesh");
         navMeshSurface = GetComponent<NavMeshSurface>();
         navMeshSurface.BuildNavMesh();
     }
+
 }

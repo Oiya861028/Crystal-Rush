@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Terrain))]
 public class TerrainDecorator : MonoBehaviour
@@ -39,8 +40,9 @@ public class TerrainDecorator : MonoBehaviour
     private TerrainData terrainData;
     private List<GameObject> spawnedObjects = new List<GameObject>();
 
-    void Start()
+    void OnEnable()
     {
+        
         terrain = GetComponent<Terrain>();
         terrainData = terrain.terrainData;
         
@@ -51,6 +53,7 @@ public class TerrainDecorator : MonoBehaviour
 
     void GenerateTerrain()
     {
+        Debug.Log("Generating Terrain>>>");
         // Random offsets for Perlin noise to create different terrain each time
         float randomXOffset = Random.Range(0f, 9999f);
         float randomZOffset = Random.Range(0f, 9999f);
@@ -188,7 +191,7 @@ public class TerrainDecorator : MonoBehaviour
     public void RegenerateTerrain()
     {
         // Clear existing decorations and regenerate
-        Start();
+        OnEnable();
     }
 
     // Clean up when script is disabled or destroyed
