@@ -80,23 +80,28 @@ public class RaycastWeapon : MonoBehaviour
     {
         Vector3 direction = end-start;
         float distance = direction.magnitude;
-        ray.origin = start;
-        ray.direction = direction;
+        ray = new Ray(start, direction); // Initialize the Ray
         if (Physics.Raycast(ray, out hitInfo, distance))
         {
-            //Debug.DrawLine(ray.origin, hitInfo.point, Color.red, 1f);
             hitEffect.transform.position = hitInfo.point;
             hitEffect.transform.forward = hitInfo.normal;
             hitEffect.Emit(1);
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.time = maxLifeTime;
-        } else{
+
+            // Check if hitInfo.collider exists before trying to access it
+            if (hitInfo.collider != null)
+            {
+                var hitBox = hitInfo.collider.GetComponent<HitBox>();
+                if(hitBox != null) {  // Also check if hitBox exists
+                    hitBox.OnRaycastHit(this, Vector3.zero);
+                }
+            }
+        } 
+        else
+        {
             bullet.tracer.transform.position = end;
-        }
-        var hitBox = hitInfo.collider.GetComponent<HitBox>();
-        if(hitBox) {
-            hitBox.OnRaycastHit(this, Vector3.zero);
         }
     }
 

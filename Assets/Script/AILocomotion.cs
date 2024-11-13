@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class AILocomotion : MonoBehaviour
 {
     NavMeshAgent agent; //agent in component
-    public Transform playerTransform; //player in Scene
+    private Transform playerTransform; //player in Scene
     public Animator animator; //animator in component
     public float maxTime; //Time to refresh agent generating new path
     float timer = 0.0f;
@@ -14,6 +14,7 @@ public class AILocomotion : MonoBehaviour
     void Start(){
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Update() {
         if(timer>=maxTime){

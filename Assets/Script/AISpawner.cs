@@ -7,8 +7,8 @@ public class AISpawner : MonoBehaviour
     [SerializeField] private BasicStatScriptableObject AIStat;
     [SerializeField] private Weapon WeaponStat;
     [SerializeField] private Transform player;
-    [SerializeField, Range(1,10)] private int NumberOfAI;
-    [SerializeField, Range(1,100)] private float offSet;
+    [SerializeField, Range(1,99)] private int NumberOfAI;
+    [SerializeField, Range(1,500)] private float offSet;
     // Start is called before the first frame update
     private GameObject[] AIModelInstances;
     
@@ -18,7 +18,7 @@ public class AISpawner : MonoBehaviour
         //Instantiate bots and 
         AIModelInstances = new GameObject[10];
         for(int i = 0; i < NumberOfAI; i++) {
-            Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 0, Random.Range(0f, offSet));
+            Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 100, Random.Range(0f, offSet));
             AIModelInstances[i] = Instantiate(AIStat.Model, (transform.position + SpawnOffset), Quaternion.identity);
             AIModelInstances[i].GetComponent<AIController>().setPlayer(player);
             //Get Weapon_Attach_Point
