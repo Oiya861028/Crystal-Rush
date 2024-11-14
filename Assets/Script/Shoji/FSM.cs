@@ -24,6 +24,8 @@ public class FSM{
         GetState(currentState)?.Update(agent);
     }
     public void ChangeState(AIStateId newState){
+        GetState(currentState)?.Exit(agent);
         currentState = newState;
+        GetState(currentState)?.Enter(agent);
     }
 }

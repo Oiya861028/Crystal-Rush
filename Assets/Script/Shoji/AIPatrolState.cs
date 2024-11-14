@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIPatrolState : AIState
 {
@@ -8,60 +9,45 @@ public class AIPatrolState : AIState
         return AIStateId.Patrol;
     }
 
-    public List<Transform> waypoints;
-    public float speed = 2f;
-    public float detectionDistance = 2f;
-    public float rotationSpeed = 2f;
+    public NavMeshAgent agent;
+    public float range; //radius of sphere
 
-    private int currentWaypoint = 0;
-    private Vector3 targetPosition;
+    public Transform centrePoint; //centre of the area the agent wants to move around in
+    //instead of centrePoint you can set it as the transform of the agent if you don't care about a specific area
 
-    void Start(){
-        if (waypoints.Count > 0){
-            targetPosition = waypoints[currentWaypoint].position;
-        }
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    public void Update(AIAgent agent){
-        MoveTowardsTarget(agent);
-
-        RaycastHit hit;
-        Vector3 forward = agent.transform.TransformDirection(Vector3.forward);
-        if (Physics.Raycast(agent.transform.position, forward, out hit, detectionDistance)){
-            if (hit.collider.CompareTag("Wall")){
-                SelectNewWaypoint();
+    
+    void Update()
+    {
+        if(agent.remainingDistance <= agent.stoppingDistance) //done with path
+        {
+            Vector3 point;
+            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            {
+                Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
+                agent.SetDestination(point);
             }
         }
 
-        if (Vector3.Distance(agent.transform.position, targetPosition) < 0.5f){
-            SelectNextWaypoint();
+    }
+    bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    {
+
+        Vector3 randomPoint = center + Random.insideUnitSphere * range; //random point in a sphere 
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) //documentation: https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html
+        { 
+            //the 1.0f is the max distance from the random point to a point on the navmesh, might want to increase if range is big
+            //or add a for loop like in the documentation
+            result = hit.position;
+            return true;
         }
-    }
 
-    void MoveTowardsTarget(AIAgent agent){
-        Vector3 direction = (targetPosition - agent.transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-        agent.transform.position += agent.transform.forward * speed * Time.deltaTime;
-    }
-
-    void SelectNextWaypoint(){
-        if (waypoints.Count == 0)
-            return;
-
-        currentWaypoint = (currentWaypoint + 1) % waypoints.Count;
-        targetPosition = waypoints[currentWaypoint].position;
-    }
-
-    void SelectNewWaypoint(){
-        if (waypoints.Count == 0)
-            return;
-
-        int newWaypoint = currentWaypoint;
-        while (newWaypoint == currentWaypoint){
-            newWaypoint = Random.Range(0, waypoints.Count);
-        }
-        currentWaypoint = newWaypoint;
-        targetPosition = waypoints[currentWaypoint].position;
+        result = Vector3.zero;
+        return false;
     }
 }

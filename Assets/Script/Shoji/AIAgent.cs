@@ -6,6 +6,13 @@ public class AIAgent : MonoBehaviour
 {
     public FSM stateMachine;
     public AIStateId initialState;
+    public Transform PlayerTransform;
+    public NavMeshAgent navmeshAgent;
+    
+    public AIAgent(Transform player, NavMeshAgent agent){
+        PlayerTransform = player;
+        navmeshAgent = agent;
+    }
     void Start()
     {
         stateMachine = new FSM(this);

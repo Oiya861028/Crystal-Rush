@@ -15,10 +15,10 @@ public class AIController : MonoBehaviour
     public float chaseRange = 10f;
     public float attackRange = 5f;
     void Start() {
-        agent = GetComponent<AIAgent>();
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        agent = new AIagent(player, navAgent);
     }
     void Update()
     { 
