@@ -6,7 +6,7 @@ using UnityEngine.AI;
 //Although this ithe controller of AI states, it's more of a middle man that provides all needed components
 public class AIAgent : MonoBehaviour
 {
-    private FSM stateMachine;
+    public FSM stateMachine;
     public AIStateId initialState;
     public Transform playerTransform;
     public NavMeshAgent navmeshAgent;//component

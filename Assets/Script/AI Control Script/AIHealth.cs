@@ -25,7 +25,7 @@ public class AIHealth : MonoBehaviour
         }
         if (health <= 0)
         {
-            Destroy(gameObject);
+            agent.stateMachine.ChangeState(AIStateId.Die);
         }
     }
 }
