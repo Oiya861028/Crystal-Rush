@@ -11,26 +11,26 @@ public class AIAttackState : AIState
     // public float damage = 1f;
     // //private float health = 10f;
 
-    // private float attackCooldown = 1f;
-    // private float lastAttackTime = 0f;
+    private float attackCooldown = 1f;
+    private float lastAttackTime = 0f;
 
-
+    
     public AIStateId GetId()
     {
         return AIStateId.Attack;
     }
-    AIStateId GetId();
-    public void Enter(AIagent Agent){
+
+    public void Enter(AIAgent agent){
 
     }
     public void Update(AIAgent agent)
     {
-        Vector3 direction = (player.position - agent.transform.position).normalized;
+        Vector3 direction = (agent.playerTransform.position - agent.transform.position).normalized;
         RaycastHit hit;
 
-        if (Physics.Raycast(agent.transform.position, direction, out hit, attackRange))
+        if (Physics.Raycast(agent.transform.position, direction, out hit, agent.AIStat.AttackDistance));
         {
-            if (hit.transform == player)
+            if (hit.transform == agent.playerTransform)
             {
                 if (Time.time >= lastAttackTime + attackCooldown)
                 {
@@ -39,14 +39,18 @@ public class AIAttackState : AIState
                 }
             }
         }
+        float distance = (agent.playerTransform.position - agent.navmeshAgent.destination).magnitude;
+        if(distance > agent.AIStat.AttackDistance){
+             agent.stateMachine.ChangeState(AIStateId.Attack);
+        }
     }
     public void Exit(AIAgent agent) {
 
     }
     void AttackPlayer(AIAgent agent)
     {
-        Vector3 direction = (player.position - agent.transform.position).normalized;
-        GameObject projectile = Object.Instantiate(projectilePrefab, agent.transform.position, Quaternion.identity);
+        Vector3 direction = (agent.playerTransform.position - agent.transform.position).normalized;
+        GameObject projectile = Object.Instantiate(agent.AIStat.projectileData.model, agent.transform.position, Quaternion.identity);
 
         Collider aiCollider = agent.gameObject.GetComponent<Collider>();
         Collider projectileCollider = projectile.GetComponent<Collider>();
@@ -59,7 +63,7 @@ public class AIAttackState : AIState
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.velocity = direction * projectileSpeed;
+            rb.velocity = direction * agent.AIStat.projectileData.projectileSpeed;
         }
         Object.Destroy(projectile, 2f);
     }

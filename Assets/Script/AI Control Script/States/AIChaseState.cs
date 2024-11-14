@@ -32,10 +32,16 @@ public class AIChaseState : AIState
         } else{
             timer+=Time.deltaTime;
         }
+        checkChangeStateCondition(agent);
+
     }
     public void Exit(AIAgent agent) {
 
     }
-        
+    private void checkChangeStateCondition(AIAgent agent){
+        if((playerTransform.position - agent.navmeshAgent.destination).magnitude > agent.AIStat.DetectionDistance){
+            agent.stateMachine.ChangeState(AIStateId.Patrol);
+        }
+    }    
     
 }

@@ -31,6 +31,13 @@ public class AIPatrolState : AIState
                 agent.navmeshAgent.SetDestination(point);
             }
         }
+        float distance = (agent.playerTransform.position - agent.navmeshAgent.destination).magnitude;
+        if(distance <agent.AIStat.AttackDistance){
+             agent.stateMachine.ChangeState(AIStateId.Attack);
+        }
+        else if(distance < agent.AIStat.DetectionDistance){
+            agent.stateMachine.ChangeState(AIStateId.Chase);
+        }
 
     }
     public void Exit(AIAgent agent){
