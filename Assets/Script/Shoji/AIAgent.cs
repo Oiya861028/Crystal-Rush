@@ -7,9 +7,9 @@ public class AIAgent : MonoBehaviour
     public FSM stateMachine;
     public AIStateId initialState;
     public Transform PlayerTransform;
-    public NavMeshAgent navmeshAgent;
+    public UnityEngine.AI.NavMeshAgent navmeshAgent;
     
-    public AIAgent(Transform player, NavMeshAgent agent){
+    public AIAgent(Transform player, UnityEngine.AI.NavMeshAgent agent){
         PlayerTransform = player;
         navmeshAgent = agent;
     }
