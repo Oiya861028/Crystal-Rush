@@ -32,7 +32,7 @@ public class CharacterAiming : MonoBehaviour
             }
         }
         
-        if(Input.GetButton("Fire1")) {
+        if(Input.GetButtonDown("Fire1")) {
             weapon.StartFiring();
         }
         if(weapon.isFiring) {

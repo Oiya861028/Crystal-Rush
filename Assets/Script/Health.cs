@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
             hitbox.health = this;
         }
     }
-    public void TakeDamage(float amount, Vector3 direction) {
+    public void TakeDamage(float amount) {
         currentHealth -= amount;
         if(currentHealth <= 0.0f) {
             die();

@@ -225,14 +225,14 @@ public class StormSystem : MonoBehaviour
                 Vector3.zero
             );
             
-            // if (distanceFromCenter > currentStormRadius)
-            // {
-            //     PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            //     if (playerHealth != null)
-            //     {
-            //         playerHealth.TakeDamage(damagePerSecond * damageTickRate);
-            //     }
-            // }
+            if (distanceFromCenter > currentStormRadius)
+            {
+                Health playerHealth = player.GetComponent<Health>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(damagePerSecond * damageTickRate);
+                }
+            }
         }
     }
 

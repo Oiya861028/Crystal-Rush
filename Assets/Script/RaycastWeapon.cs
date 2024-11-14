@@ -56,14 +56,14 @@ public class RaycastWeapon : MonoBehaviour
     public void UpdateFiring(float deltaTime) {
         timeSincegunFired += deltaTime;
         float fireInterval = 1.0f / fireRate;
-        while(timeSincegunFired >= 0.0f) {
+        while(timeSincegunFired >= fireInterval) {
             FireBullet();
             timeSincegunFired -= fireInterval;
         }
     }
     public void UpdateBullet(float deltaTime) {
-        simulateBullet(deltaTime);
         DestroyBullets();
+        simulateBullet(deltaTime);
     }
     private void simulateBullet(float deltaTime) {
         bullets.ForEach(bullet => {
@@ -74,7 +74,7 @@ public class RaycastWeapon : MonoBehaviour
         });
     }
     private void DestroyBullets(){
-        bullets.RemoveAll(bullet => bullet.time>=maxLifeTime);
+        bullets.RemoveAll(bullet => bullet.time >= maxLifeTime);
     }
     private void RaycastSegment(Vector3 start, Vector3 end, Bullet bullet)
     {
@@ -107,7 +107,7 @@ public class RaycastWeapon : MonoBehaviour
 
     private void FireBullet()
     {   
-        
+        Debug.Log("Firing bullet");
         Vector3 velocity = (RaycastDestination.position - RaycastOrigin.position).normalized * bulletSpeed;
         var bullet = CreateBullet(RaycastOrigin.position, velocity);
         bullets.Add(bullet);
