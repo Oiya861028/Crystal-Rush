@@ -20,7 +20,6 @@ public class AISpawner : MonoBehaviour
         for(int i = 0; i < NumberOfAI; i++) {
             Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 20, Random.Range(0f, offSet));
             AIModelInstances[i] = Instantiate(AIStat.Model, (transform.position + SpawnOffset), Quaternion.identity);
-            AIModelInstances[i].GetComponent<AIController>().setPlayer(player);
             //Get Weapon_Attach_Point
             GameObject Weapon = Instantiate(WeaponStat.WeaponModel, getWeaponAttachPoint(i).transform);
         }

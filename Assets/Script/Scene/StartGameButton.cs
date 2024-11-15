@@ -9,6 +9,6 @@ public class StartGameButton : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(Terrain);
+        SceneManager.LoadScene(GameMap);
     }
 }
