@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         if(groundTimer>0) 
             groundTimer -= Time.deltaTime;  //Updating groundTimer
         if(isGrounded && Velocity.y<0) {
-            Velocity.y = 0 ; //Set falling speed to 0 if touched ground
+            Velocity.y = 0 ; //Set falling speed to 0 if falling has come in contact with ground
         }
         Velocity.y -= -2f*Gravity*Time.deltaTime; //Always applying gravity to make sure character moves down when going down a ramp or something
         if(isGrounded && Input.GetKey(KeyCode.Space)){ //If jump key is pressed and is grounded then we apply up force

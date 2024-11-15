@@ -5,6 +5,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public float health = 10f;
     public Slider healthBar;
+    public Animator animator;
 
     public void TakeDamage(float damage)
     {
@@ -14,9 +15,10 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Player has died!");
-
+            animator.SetBool("isPlayerAlive", false);
+            Destroy(gameObject);
             // Load the losing scene
-            FindObjectOfType<SceneController>().LoadLosingScene();
+            FindFirstObjectByType<SceneController>().LoadLosingScene();
         }
     }
 }

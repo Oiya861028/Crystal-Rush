@@ -63,7 +63,7 @@ public class AIAttackState : AIState
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.velocity = direction * agent.AIStat.projectileData.projectileSpeed;
+            rb.linearVelocity = direction * agent.AIStat.projectileData.projectileSpeed;
         }
         Object.Destroy(projectile, 2f);
     }

@@ -3,7 +3,7 @@ using UnityEngine.Animations.Rigging;
 public class CharacterAiming : MonoBehaviour
 {
     public float turningSpeed = 15f;
-    public Rig aimLayer;
+    public Rig aimLayer; //Posing Rog
     public float aimDuration = 0.2f;
     Camera mainCamera;
     RaycastWeapon weapon;

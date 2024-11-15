@@ -1031,6 +1031,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 322637610245907186, guid: a1871336b26d228469d09b30488897c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92260814
+      objectReference: {fileID: 0}
+    - target: {fileID: 322637610245907186, guid: a1871336b26d228469d09b30488897c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.38573858
+      objectReference: {fileID: 0}
     - target: {fileID: 2661838664364014241, guid: a1871336b26d228469d09b30488897c6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.93134403
@@ -1042,6 +1050,14 @@ PrefabInstance:
     - target: {fileID: 4097437255859622622, guid: a1871336b26d228469d09b30488897c6, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812242421675839987, guid: a1871336b26d228469d09b30488897c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.91341245
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812242421675839987, guid: a1871336b26d228469d09b30488897c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.40703535
       objectReference: {fileID: 0}
     - target: {fileID: 8589469591702926350, guid: a1871336b26d228469d09b30488897c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1160,7 +1176,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1534686550}
-  - component: {fileID: 1534686551}
   m_Layer: 0
   m_Name: AI Spawner
   m_TagString: Untagged
@@ -1183,23 +1198,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1534686551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534686548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47c9b1c00eec1b1478889f264a269bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AIStat: {fileID: 11400000, guid: f8dc3328dd3ec0f448ae20657d1fc8ad, type: 2}
-  WeaponStat: {fileID: 11400000, guid: b99b382a1c725bb468d60b0bce8d5932, type: 2}
-  player: {fileID: 961244501}
-  NumberOfAI: 10
-  offSet: 22
 --- !u!1 &1616633160
 GameObject:
   m_ObjectHideFlags: 0
