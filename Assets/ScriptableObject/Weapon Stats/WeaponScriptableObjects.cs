@@ -9,6 +9,4 @@ public class Weapon:ScriptableObject {
     public GameObject WeaponModel;
     public Projectile projectileModel;
     
-    
-
 }

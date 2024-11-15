@@ -6,7 +6,7 @@ using UnityEngine.TextCore.Text;
 //Attach Script to AI prefab, this script will 
 public class AIController : MonoBehaviour
 {
-    [SerializeField] private BasicStatScriptableObject AIStat;//Stat Data Bank for Weak AI
+    [SerializeField] private AIStatScriptableObject AIStat;//Stat Data Bank for Weak AI
     [SerializeField] private Weapon WeaponStat;
     private Transform PlayerTransform;
     private Animator animator;

@@ -1,7 +1,20 @@
 using System.Security.Principal;
 using UnityEditor;
 using UnityEngine;
-[CreateAssetMenu(fileName = "AIStatScriptableObject", menuName = "ScriptableObject/AIStats")]
-public class AIStatScriptableObject:BasicStatScriptableObject{
+[CreateAssetMenu(fileName = "CharacterStatScriptableObject", menuName = "ScriptableObject/Stats")]
+public class AIStatScriptableObject:ScriptableObject{
+    //Basic Stats
+    public float Health;
+    public float WalkingSpeed;
+    public float RunningSpeed;
+    public float JumpForce;
+    //Special Features
+    public GameObject Model; 
+    public Projectile projectileData;
+    public float DetectionDistance;
+    public float AttackDistance;
+
+    //NavMeshAgent
     public float minTime = 3f;//time to refresh NavMesh pathfinder
+    public float minDistance = 3f; //distance to enable pathfinder refresh
 }

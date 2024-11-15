@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Terrain))]
-public class TerrainDecorator : MonoBehaviour
+public class TerrainGenerator : MonoBehaviour
 {
     [Header("Terrain Features")]
     [Range(0.1f, 1f)]

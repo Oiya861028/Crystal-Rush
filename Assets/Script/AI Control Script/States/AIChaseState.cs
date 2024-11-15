@@ -4,7 +4,7 @@ using UnityEngine;
 public class AIChaseState : AIState
 {
     public Transform playerTransform;
-    BasicStatScriptableObject AIStat;
+    AIStatScriptableObject AIStat;
     float timer = 0.0f;
     public AIStateId GetId(){
         return AIStateId.Chase;

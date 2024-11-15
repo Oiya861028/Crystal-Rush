@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile:ScriptableObject{
 
     public GameObject model;
+    public Material hitEffect;
     public float baseDamage = 10f;
     public float projectileSpeed = 100f;
     public String projectileName;

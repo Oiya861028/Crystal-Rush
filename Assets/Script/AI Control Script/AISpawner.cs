@@ -4,7 +4,7 @@ using UnityEngine.AI;
 //The purpose of this script is to spawn multiple AI across the map and equip them with weapon
 public class AISpawner : MonoBehaviour
 {
-    [SerializeField] private BasicStatScriptableObject AIStat;
+    [SerializeField] private AIStatScriptableObject AIStat;
     [SerializeField] private Weapon WeaponStat;
     [SerializeField] private Transform player;
     [SerializeField, Range(1,99)] private int NumberOfAI;

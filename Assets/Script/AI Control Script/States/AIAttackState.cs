@@ -28,7 +28,7 @@ public class AIAttackState : AIState
         Vector3 direction = (agent.playerTransform.position - agent.transform.position).normalized;
         RaycastHit hit;
 
-        if (Physics.Raycast(agent.transform.position, direction, out hit, agent.AIStat.AttackDistance));
+        if (Physics.Raycast(agent.transform.position, direction, out hit, agent.AIStat.AttackDistance))
         {
             if (hit.transform == agent.playerTransform)
             {

@@ -10,7 +10,7 @@ public class AIAgent : MonoBehaviour
     public AIStateId initialState;
     public Transform playerTransform;
     public NavMeshAgent navmeshAgent;//component
-    public BasicStatScriptableObject AIStat;//scriptableObject
+    public AIStatScriptableObject AIStat;//scriptableObject
     public Transform Mapcenter; //The center of MAP in which the AI will patrol
     public float mapRange; //The range of MAP
     
