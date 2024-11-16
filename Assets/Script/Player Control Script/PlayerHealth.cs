@@ -10,10 +10,8 @@ public class PlayerHealth : MonoBehaviour
     public Animator animator;
     public void Start(){
         currentHealth = Maxhealth;
-        if(healthBar==null){
-            healthBar = GetComponent<Slider>();
-            healthBar.maxValue = currentHealth;
-        }
+        healthBar.maxValue = currentHealth;
+        healthBar.value = currentHealth;
     }
     public void TakeDamage(float damage)
     {

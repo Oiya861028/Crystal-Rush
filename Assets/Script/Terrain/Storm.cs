@@ -183,7 +183,7 @@ public class StormSystem : MonoBehaviour
     {
         if (stormWall != null)
         {
-            float diameter = currentStormRadius * 2;
+            float diameter = currentStormRadius;
             stormWall.transform.localScale = new Vector3(diameter, stormWallHeight, diameter);
         }
     }
@@ -224,7 +224,8 @@ public class StormSystem : MonoBehaviour
                 new Vector3(player.transform.position.x, 0, player.transform.position.z), 
                 Vector3.zero
             );
-            
+            Debug.Log("Player Distance:"+distanceFromCenter);
+            Debug.Log("Storm radius:"+ currentStormRadius);
             if (distanceFromCenter > currentStormRadius)
             {
                 PlayerHealth health = player.GetComponent<PlayerHealth>();
