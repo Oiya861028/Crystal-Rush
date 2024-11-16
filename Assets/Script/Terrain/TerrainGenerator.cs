@@ -103,6 +103,7 @@ public class TerrainGenerator : MonoBehaviour
                 heightScale = Random.Range(0.8f, 1.2f),
                 widthScale = Random.Range(0.8f, 1.2f)
             };
+            
             trees.Add(tree);
         }
         terrainData.treeInstances = trees.ToArray();

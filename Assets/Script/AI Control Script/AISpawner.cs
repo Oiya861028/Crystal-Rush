@@ -20,12 +20,12 @@ public class AISpawner : MonoBehaviour
         //Instantiate bots and 
         AIModelInstances = new GameObject[NumberOfAI];
         for(int i = 0; i < NumberOfAI; i++) {
-            Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 50, Random.Range(0f, offSet));
+            Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 100, Random.Range(0f, offSet));
             if(Physics.Raycast(SpawnOffset, Vector3.down, out RaycastHit hit, Mathf.Infinity)){
                 Debug.Log("AI hit");
                 SpawnOffset.y = hit.point.y + heightAdjust;
             }        
-            AIModelInstances[i] = Instantiate(AIStat.Model, transform.position + SpawnOffset, Quaternion.identity, transform);
+            AIModelInstances[i] = Instantiate(AIStat.Model, SpawnOffset, Quaternion.identity, transform);
             //Get Weapon_Attach_Point
 
         }

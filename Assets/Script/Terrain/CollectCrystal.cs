@@ -12,7 +12,7 @@ public class CollectCrystal : MonoBehaviour
         float distance = Vector3.Distance(playerTransform.position, transform.position);
         if(distance<detectRange){
             Debug.Log("Destroyed");
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 
