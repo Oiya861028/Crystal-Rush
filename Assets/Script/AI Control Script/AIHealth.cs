@@ -31,7 +31,7 @@ public class AIHealth : MonoBehaviour
         }
         if(currentHealth <= 0.0f) {
             Debug.Log("Dead");
-            die();
+            agent.die();
         }
         blinkTimer = BlinkDuration;
     } 
@@ -40,8 +40,5 @@ public class AIHealth : MonoBehaviour
         float lerp = Mathf.Clamp01(blinkTimer/BlinkDuration);
         float intensity = lerp * BlinkIntensity + 1.0f;
         skinnedMeshRenderer.material.color = Color.white * intensity;
-    }
-    private void die() {
-        agent.stateMachine.ChangeState(AIStateId.Die);
     }
 }

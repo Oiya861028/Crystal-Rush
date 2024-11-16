@@ -30,9 +30,6 @@ public class AIAgent : MonoBehaviour
         if(playerTransform == null) {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        if(MapCenter == null) {
-            MapCenter = GameObject.FindGameObjectWithTag("MapCenter").transform;
-        }
         
     }
     void Update()
@@ -44,13 +41,13 @@ public class AIAgent : MonoBehaviour
     }
     private void registerMachineStates(){
         stateMachine.RegisterState(new AIChaseState());
-        // stateMachine.RegisterState(new AIPatrolState());
-        // stateMachine.RegisterState(new AIAttackState());
-        // stateMachine.RegisterState(new AIFleeState());
-        // stateMachine.RegisterState(new AIDieState());
+        stateMachine.RegisterState(new AIPatrolState());
+        stateMachine.RegisterState(new AIAttackState());
+        stateMachine.RegisterState(new AIFleeState());
     }
-    public void Die(){
-        Debug.Log("Dead");
+    public void die(){
+        playerAliveCount counter = FindFirstObjectByType<playerAliveCount>();
+        counter.updateCounter();
         Destroy(gameObject);
     }
 }

@@ -10,6 +10,7 @@ public class AISpawner : MonoBehaviour
     [SerializeField, Range(1,99)] private int NumberOfAI;
     [SerializeField, Range(1,500)] private float offSet;
     [SerializeField, Range(0,10)] private float heightAdjust;
+    public Transform MapCenter;
 
     // Start is called before the first frame update
     private GameObject[] AIModelInstances;
@@ -22,10 +23,10 @@ public class AISpawner : MonoBehaviour
         for(int i = 0; i < NumberOfAI; i++) {
             Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 100, Random.Range(0f, offSet));
             if(Physics.Raycast(SpawnOffset, Vector3.down, out RaycastHit hit, Mathf.Infinity)){
-                Debug.Log("AI hit");
                 SpawnOffset.y = hit.point.y + heightAdjust;
             }        
             AIModelInstances[i] = Instantiate(AIStat.Model, SpawnOffset, Quaternion.identity, transform);
+            AIModelInstances[i].GetComponent<AIAgent>().MapCenter = this.MapCenter;
             //Get Weapon_Attach_Point
 
         }

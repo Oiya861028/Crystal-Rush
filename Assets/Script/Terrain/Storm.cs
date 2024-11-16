@@ -224,8 +224,6 @@ public class StormSystem : MonoBehaviour
                 new Vector3(player.transform.position.x, 0, player.transform.position.z), 
                 Vector3.zero
             );
-            Debug.Log("Player Distance:"+distanceFromCenter);
-            Debug.Log("Storm radius:"+ currentStormRadius);
             if (distanceFromCenter > currentStormRadius)
             {
                 PlayerHealth health = player.GetComponent<PlayerHealth>();

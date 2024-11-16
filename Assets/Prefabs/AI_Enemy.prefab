@@ -2559,6 +2559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialState: 0
+  AIGameObject: {fileID: 2901560459918525726}
   playerTransform: {fileID: 0}
   navmeshAgent: {fileID: 0}
   AIStat: {fileID: 11400000, guid: 35769b11795ebe5458168700c96a5038, type: 2}
