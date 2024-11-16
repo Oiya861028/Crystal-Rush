@@ -62,8 +62,8 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
     public void UpdateBullet(float deltaTime) {
-        DestroyBullets();
         simulateBullet(deltaTime);
+        DestroyBullets();
     }
     private void simulateBullet(float deltaTime) {
         bullets.ForEach(bullet => {
@@ -86,16 +86,17 @@ public class RaycastWeapon : MonoBehaviour
             hitEffect.transform.position = hitInfo.point;
             hitEffect.transform.forward = hitInfo.normal;
             hitEffect.Emit(1);
-
+            //TODO
+            //Add other hit and sound effects
             bullet.tracer.transform.position = hitInfo.point;
             bullet.time = maxLifeTime;
 
             // Check if hitInfo.collider exists before trying to access it
             if (hitInfo.collider != null)
             {
-                var hitBox = hitInfo.collider.GetComponent<HitBox>();
+                var hitBox = hitInfo.collider.GetComponent<AIHitBox>();
                 if(hitBox != null) {  // Also check if hitBox exists
-                    hitBox.OnRaycastHit(this, Vector3.zero);
+                    hitBox.OnRaycastHit(this);
                 }
             }
         } 

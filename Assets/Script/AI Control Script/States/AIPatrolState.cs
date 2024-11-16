@@ -16,7 +16,7 @@ public class AIPatrolState : AIState
 
     public void Enter(AIAgent agent)
     {
-        centrePoint = agent.Mapcenter;//the AI will patrol with the center of map as center
+        centrePoint = agent.MapCenter;//the AI will patrol with the center of map as center
     }
 
     

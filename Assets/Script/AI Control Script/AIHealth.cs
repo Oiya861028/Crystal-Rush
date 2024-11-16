@@ -3,29 +3,30 @@ using UnityEngine.UI;
 
 public class AIHealth : MonoBehaviour
 {
-    public float health = 10f;
-    public Slider healthBar;
-    private UnityEngine.AI.NavMeshAgent navAgent;
-    private AIAgent agent;
-
-    void Start()
-    {
-        navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+     AIAgent agent;
+    public float MaxHealth;
+    [HideInInspector]
+    public float currentHealth;
+    void Start() {
         agent = GetComponent<AIAgent>();
-        healthBar.maxValue = health;
-        healthBar.value = health;
+        currentHealth = MaxHealth;
+        var rigidbodies = GetComponentsInChildren<Rigidbody>();
+        foreach(var rigidbody in rigidbodies) {
+            AIHitBox hitbox = rigidbody.gameObject.AddComponent<AIHitBox>();
+            hitbox.health = this;
+        }
     }
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        healthBar.value = health;
-        if (health <= 3) {
+    public void TakeDamage(float amount) {
+        currentHealth -= amount;
+        if(currentHealth <= 0.3*MaxHealth) {
             agent.stateMachine.ChangeState(AIStateId.Flee);
         }
-        if (health <= 0)
-        {
-            agent.stateMachine.ChangeState(AIStateId.Die);
+        if(currentHealth <= 0.0f) {
+            Debug.Log("Dead");
+            die();
         }
+    } 
+    private void die() {
+        agent.stateMachine.ChangeState(AIStateId.Die);
     }
 }

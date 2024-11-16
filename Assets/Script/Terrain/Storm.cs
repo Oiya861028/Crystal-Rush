@@ -128,7 +128,7 @@ public class StormSystem : MonoBehaviour
         
         var main = stormParticles.main;
         main.loop = true;
-        main.duration = 1;
+        //main.duration = 1;
         main.startLifetime = 3;
         main.startSpeed = 2;
         main.startSize = 5;
@@ -227,10 +227,10 @@ public class StormSystem : MonoBehaviour
             
             if (distanceFromCenter > currentStormRadius)
             {
-                Health playerHealth = player.GetComponent<Health>();
-                if (playerHealth != null)
+                PlayerHealth health = player.GetComponent<PlayerHealth>();
+                if (health != null)
                 {
-                    playerHealth.TakeDamage(damagePerSecond * damageTickRate);
+                    health.TakeDamage(damagePerSecond * damageTickRate);
                 }
             }
         }

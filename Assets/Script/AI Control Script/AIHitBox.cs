@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBox : MonoBehaviour
+public class AIHitBox : MonoBehaviour
 {
-    public Health health;
-    public void OnRaycastHit(RaycastWeapon Weapon, Vector3 direction) {
+    public AIHealth health;
+    public void OnRaycastHit(RaycastWeapon Weapon) {
         health.TakeDamage(Weapon.dmg);
     }
     

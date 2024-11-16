@@ -1,18 +1,26 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health = 10f;
+    public float Maxhealth;
+    private float currentHealth;
     public Slider healthBar;
     public Animator animator;
-
+    public void Start(){
+        currentHealth = Maxhealth;
+        if(healthBar==null){
+            healthBar = GetComponent<Slider>();
+            healthBar.maxValue = currentHealth;
+        }
+    }
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        healthBar.value = health;
+        currentHealth -= damage;
+        healthBar.value = currentHealth;
 
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             Debug.Log("Player has died!");
             animator.SetBool("isPlayerAlive", false);

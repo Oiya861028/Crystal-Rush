@@ -5,10 +5,11 @@ public class CharacterLocomotion : MonoBehaviour
 {
     Animator animator;
     CharacterController Controller;
+    [SerializeField] private float spawnOffSet;
     [SerializeField] private float jumpForce;
     [SerializeField] private float Gravity = -9.81f;
     [SerializeField] private float normalSpeed;
-    [SerializeField] private float sprintSpeedMultiplier; 
+    [SerializeField] private float sprintSpeedMultiplier = 1.5f; 
     private Vector3 Velocity = Vector3.zero;
     private float groundTimer;
     Vector2 input;
@@ -17,6 +18,11 @@ public class CharacterLocomotion : MonoBehaviour
     {
         animator = GetComponent<Animator>();   
         Controller = GetComponent<CharacterController>();
+        animator.SetFloat("SprintMultiplier", sprintSpeedMultiplier);
+        if(Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity)){
+            Vector3 newPosition = new Vector3(hit.point.x, hit.point.y+spawnOffSet, hit.point.z);
+            transform.position = newPosition;
+        }
     }
 
     // Update is called once per frame
@@ -54,14 +60,8 @@ public class CharacterLocomotion : MonoBehaviour
     }
 
     int isSprintingParam = Animator.StringToHash("IsSprinting");
-    int sprintMultiplierParam = Animator.StringToHash("sprintMultiplier");
     void updateIsSprinting(){
         bool isSprinting = Input.GetKey(KeyCode.LeftShift);
         animator.SetBool(isSprintingParam, isSprinting);
-        if(isSprinting){
-            animator.SetFloat(sprintMultiplierParam, sprintSpeedMultiplier);
-        }else{
-            animator.SetFloat(sprintMultiplierParam, normalSpeed);
-        }
     }
 }

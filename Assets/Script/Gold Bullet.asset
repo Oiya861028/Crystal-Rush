@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Gold Bullet
   m_EditorClassIdentifier: 
   model: {fileID: 5568237404133233785, guid: d24177090fdf26a4898ee949a1d4795e, type: 3}
+  hitEffect: {fileID: 2100000, guid: 8ea6ed53aae46fe4e83d154e73aed27e, type: 2}
   baseDamage: 10
+  projectileSpeed: 100
   projectileName: Gold Balls

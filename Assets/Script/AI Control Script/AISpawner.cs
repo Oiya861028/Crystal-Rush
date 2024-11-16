@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,9 +7,10 @@ public class AISpawner : MonoBehaviour
 {
     [SerializeField] private AIStatScriptableObject AIStat;
     [SerializeField] private Weapon WeaponStat;
-    [SerializeField] private Transform player;
     [SerializeField, Range(1,99)] private int NumberOfAI;
     [SerializeField, Range(1,500)] private float offSet;
+    [SerializeField, Range(0,10)] private float heightAdjust;
+
     // Start is called before the first frame update
     private GameObject[] AIModelInstances;
     
@@ -16,12 +18,16 @@ public class AISpawner : MonoBehaviour
     void Start()
     {
         //Instantiate bots and 
-        AIModelInstances = new GameObject[10];
+        AIModelInstances = new GameObject[NumberOfAI];
         for(int i = 0; i < NumberOfAI; i++) {
-            Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 20, Random.Range(0f, offSet));
-            AIModelInstances[i] = Instantiate(AIStat.Model, (transform.position + SpawnOffset), Quaternion.identity);
+            Vector3 SpawnOffset = new Vector3(Random.Range(0f, offSet), 50, Random.Range(0f, offSet));
+            if(Physics.Raycast(SpawnOffset, Vector3.down, out RaycastHit hit, Mathf.Infinity)){
+                Debug.Log("AI hit");
+                SpawnOffset.y = hit.point.y + heightAdjust;
+            }        
+            AIModelInstances[i] = Instantiate(AIStat.Model, transform.position + SpawnOffset, Quaternion.identity, transform);
             //Get Weapon_Attach_Point
-            GameObject Weapon = Instantiate(WeaponStat.WeaponModel, getWeaponAttachPoint(i).transform);
+
         }
         
     }
