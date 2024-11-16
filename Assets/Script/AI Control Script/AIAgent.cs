@@ -1,39 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 //This script will be attached to the AI prefab
-//Although this ithe controller of AI states, it's more of a middle man that provides all needed components
 public class AIAgent : MonoBehaviour
 {
     public FSM stateMachine;
     public AIStateId initialState;
-    [HideInInspector]
     public Transform playerTransform;
-    [HideInInspector]
     public NavMeshAgent navmeshAgent;//component
     public AIStatScriptableObject AIStat;//scriptableObject
-    [HideInInspector]
-    public Transform MapCenter; //The center of MAP in which the AI will patrol
-    public float mapRange = 500; //The range of MAP
+    public StormSystem storm;
     
-    void Start()
+    public void Start()
     {
         //Assigning states
         stateMachine = new FSM(this);
         registerMachineStates();
         stateMachine.ChangeState(initialState);
         //Assigning variables 
-        if(navmeshAgent == null){
-            navmeshAgent = GetComponent<NavMeshAgent>();
-        }   
-        if(playerTransform == null) {
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+        navmeshAgent = GetComponent<NavMeshAgent>();
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         
+        storm = GameObject.FindAnyObjectByType<StormSystem>();
     }
-    void Update()
+    public void Update()
     {
+        navmeshAgent = GetComponent<NavMeshAgent>();
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        storm = GameObject.FindAnyObjectByType<StormSystem>();
+        
+        if(storm == null){
+            Debug.LogError("Did not find any storm script");
+        }
+        if(playerTransform==null ){
+            Debug.LogError("Did not find any playerTransform script");
+        }
+        if(playerTransform==null ){
+            Debug.LogError("Did not find any navMeshAgent script");
+        }
         if(stateMachine==null){
             Debug.Log("StateMachine is null");
         }

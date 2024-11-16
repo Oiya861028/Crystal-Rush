@@ -2465,10 +2465,10 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 185583c0e3763a24a9674a5269495f81, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 1
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -2500,7 +2500,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &1563447379524757962
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2559,12 +2559,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialState: 0
-  AIGameObject: {fileID: 2901560459918525726}
   playerTransform: {fileID: 0}
-  navmeshAgent: {fileID: 0}
+  navmeshAgent: {fileID: 1316494773623369937}
   AIStat: {fileID: 11400000, guid: 35769b11795ebe5458168700c96a5038, type: 2}
-  MapCenter: {fileID: 0}
-  mapRange: 500
+  storm: {fileID: 0}
 --- !u!114 &4489560866000185178
 MonoBehaviour:
   m_ObjectHideFlags: 0

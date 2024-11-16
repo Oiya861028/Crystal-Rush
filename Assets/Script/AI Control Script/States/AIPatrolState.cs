@@ -10,13 +10,15 @@ public class AIPatrolState : AIState
     }
 
     public float range; //radius of sphere
+    public StormSystem storm;
 
-    public Transform centrePoint; //centre of the area the agent wants to move around in
+    public Vector3 centrePoint; //centre of the area the agent wants to move around in
     //instead of centrePoint you can set it as the transform of the agent if you don't care about a specific area
 
     public void Enter(AIAgent agent)
     {
-        centrePoint = agent.MapCenter;//the AI will patrol with the center of map as center
+        centrePoint = Vector3.zero;//the AI will patrol with the center of map as center
+        range = agent.storm.currentStormRadius;
     }
 
     
@@ -25,7 +27,7 @@ public class AIPatrolState : AIState
         if(agent.navmeshAgent.remainingDistance <= agent.navmeshAgent.stoppingDistance) //done with path
         {
             Vector3 point;
-            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            if (RandomPoint(centrePoint, range, out point)) //pass in our centre point and radius of area
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
                 agent.navmeshAgent.SetDestination(point);
@@ -33,9 +35,11 @@ public class AIPatrolState : AIState
         }
         float distance = (agent.playerTransform.position - agent.navmeshAgent.destination).magnitude;
         if(distance <agent.AIStat.AttackDistance){
-             agent.stateMachine.ChangeState(AIStateId.Attack);
+            Debug.Log("Switching from Patrol to Attack");
+            agent.stateMachine.ChangeState(AIStateId.Attack);
         }
         else if(distance < agent.AIStat.DetectionDistance){
+            Debug.Log("Switching from Patrol to Chase");
             agent.stateMachine.ChangeState(AIStateId.Chase);
         }
 

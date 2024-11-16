@@ -18,7 +18,7 @@ public class StormSystem : MonoBehaviour
     [SerializeField] private float emissionIntensity = 2f;
     [SerializeField] private float scrollSpeed = 2f;
     
-    private float currentStormRadius;
+    public float currentStormRadius;
     private float shrinkStartTime;
     private bool isStormActive = false;
     private GameObject stormWall;

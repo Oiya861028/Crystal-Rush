@@ -41,7 +41,8 @@ public class AIAttackState : AIState
         }
         float distance = (agent.playerTransform.position - agent.navmeshAgent.destination).magnitude;
         if(distance > agent.AIStat.AttackDistance){
-             agent.stateMachine.ChangeState(AIStateId.Attack);
+            Debug.Log("switching from Attack to Chase");
+            agent.stateMachine.ChangeState(AIStateId.Chase);
         }
     }
     public void Exit(AIAgent agent) {

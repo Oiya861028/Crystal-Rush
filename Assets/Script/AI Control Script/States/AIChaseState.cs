@@ -39,7 +39,12 @@ public class AIChaseState : AIState
 
     }
     private void checkChangeStateCondition(AIAgent agent){
+        if((playerTransform.position - agent.navmeshAgent.destination).magnitude > agent.AIStat.AttackDistance){
+            Debug.Log("Switching form chase to Attack");
+            agent.stateMachine.ChangeState(AIStateId.Attack);
+        }
         if((playerTransform.position - agent.navmeshAgent.destination).magnitude > agent.AIStat.DetectionDistance){
+            Debug.Log("Switching from chase to patrol");
             agent.stateMachine.ChangeState(AIStateId.Patrol);
         }
     }    

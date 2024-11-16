@@ -53,7 +53,6 @@ public class TerrainGenerator : MonoBehaviour
 
     void GenerateTerrain()
     {
-        Debug.Log("Generating Terrain>>>");
         // Random offsets for Perlin noise to create different terrain each time
         float randomXOffset = Random.Range(0f, 9999f);
         float randomZOffset = Random.Range(0f, 9999f);

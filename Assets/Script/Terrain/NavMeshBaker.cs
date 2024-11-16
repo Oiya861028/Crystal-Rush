@@ -8,7 +8,6 @@ public class NavMeshBaker : MonoBehaviour
     NavMeshSurface navMeshSurface;
     void Start()
     {
-        Debug.Log("Generating NavMesh");
         navMeshSurface = GetComponent<NavMeshSurface>();
         // Set the layer mask to exclude the "IgnoreNavMesh" layer
         int ignoreLayer = LayerMask.NameToLayer("IgnoreNavMesh");

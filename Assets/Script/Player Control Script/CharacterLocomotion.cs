@@ -19,6 +19,7 @@ public class CharacterLocomotion : MonoBehaviour
         animator = GetComponent<Animator>();   
         Controller = GetComponent<CharacterController>();
         animator.SetFloat("SprintMultiplier", sprintSpeedMultiplier);
+        animator.SetFloat("SpeedMultiplier", normalSpeed);
         if(Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity)){
             Vector3 newPosition = new Vector3(hit.point.x, hit.point.y+spawnOffSet, hit.point.z);
             transform.position = newPosition;
@@ -28,6 +29,8 @@ public class CharacterLocomotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetFloat("SprintMultiplier", sprintSpeedMultiplier);
+        animator.SetFloat("SpeedMultiplier", normalSpeed);
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical");
         

@@ -27,6 +27,7 @@ public class AIHealth : MonoBehaviour
         currentHealth -= amount;
         HealthBar.value = currentHealth;
         if(currentHealth <= 0.3*MaxHealth) {
+            Debug.Log("entering flee");
             agent.stateMachine.ChangeState(AIStateId.Flee);
         }
         if(currentHealth <= 0.0f) {
