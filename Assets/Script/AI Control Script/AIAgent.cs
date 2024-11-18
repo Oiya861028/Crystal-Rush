@@ -12,6 +12,7 @@ public class AIAgent : MonoBehaviour
     
     public void Start()
     {
+        storm = GameObject.FindAnyObjectByType<StormSystem>();
         //Assigning states
         stateMachine = new FSM(this);
         registerMachineStates();
@@ -21,7 +22,7 @@ public class AIAgent : MonoBehaviour
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         
-        storm = GameObject.FindAnyObjectByType<StormSystem>();
+
     }
     public void Update()
     {
