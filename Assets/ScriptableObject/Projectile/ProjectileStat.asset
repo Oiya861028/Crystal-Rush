@@ -15,5 +15,5 @@ MonoBehaviour:
   model: {fileID: 8225460515675447244, guid: 7ecc79d45b8dc4210afa841ad7779a92, type: 3}
   hitEffect: {fileID: 0}
   baseDamage: 10
-  projectileSpeed: 100
-  projectileName: 
+  projectileSpeed: 70
+  projectileName: bullet

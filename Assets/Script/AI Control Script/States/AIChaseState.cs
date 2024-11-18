@@ -1,52 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 public class AIChaseState : AIState
 {
-    public Transform playerTransform;
     AIStatScriptableObject AIStat;
     float timer = 0.0f;
+    private float optimalAttackDistance;
+    
     public AIStateId GetId(){
         return AIStateId.Chase;
     }
+    
+
     public void Enter(AIAgent agent) {
-        if(playerTransform == null) {
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-            Debug.Log("Assigning playerTransform in AIChaseState");
-        }
         if(AIStat == null) {
             AIStat = agent.AIStat;
         }
+        optimalAttackDistance = agent.AIStat.AttackDistance * 0.8f;
     }
+    
     public void Update(AIAgent agent){
-        if(!agent.enabled) {
+        if(!agent.enabled || agent.currentTarget == null) {
             return;
         }
-        if(agent.navmeshAgent.destination == null){
-            agent.navmeshAgent.destination = playerTransform.position;
+
+        float distanceToTarget = Vector3.Distance(agent.transform.position, agent.currentTarget.position);
+        
+        if(distanceToTarget > agent.AIStat.AttackDistance + 2f) {
+            if(timer >= AIStat.minTime){
+                Vector3 directionToTarget = (agent.currentTarget.position - agent.transform.position).normalized;
+                Vector3 targetPosition = agent.currentTarget.position - (directionToTarget * optimalAttackDistance);
+                agent.navmeshAgent.destination = targetPosition;
+                timer = 0.0f;
+            } else {
+                timer += Time.deltaTime;
+            }
+        } else {
+            agent.navmeshAgent.destination = agent.transform.position;
         }
-        if(timer>=AIStat.minTime){
-            if((playerTransform.position - agent.navmeshAgent.destination).magnitude > AIStat.minDistance)
-                agent.navmeshAgent.destination = playerTransform.position;
-            timer = 0.0f;
-        } else{
-            timer+=Time.deltaTime;
-        }
+
         checkChangeStateCondition(agent);
-
     }
+
     public void Exit(AIAgent agent) {
-
+        timer = 0.0f;
     }
+
     private void checkChangeStateCondition(AIAgent agent){
-        if((playerTransform.position - agent.navmeshAgent.destination).magnitude > agent.AIStat.AttackDistance){
-            Debug.Log("Switching form chase to Attack");
+        float distanceToTarget = Vector3.Distance(agent.transform.position, agent.currentTarget.position);
+        
+        if(distanceToTarget <= agent.AIStat.AttackDistance && 
+           agent.navmeshAgent.velocity.magnitude < 0.1f) {
+            Debug.Log("Switching from chase to Attack");
             agent.stateMachine.ChangeState(AIStateId.Attack);
         }
-        if((playerTransform.position - agent.navmeshAgent.destination).magnitude > agent.AIStat.DetectionDistance){
+        else if(distanceToTarget > agent.AIStat.DetectionDistance) {
             Debug.Log("Switching from chase to patrol");
             agent.stateMachine.ChangeState(AIStateId.Patrol);
         }
-    }    
-    
+    }
 }

@@ -24,25 +24,21 @@ public class AIPatrolState : AIState
     
     public void Update(AIAgent agent)
     {
-        if(agent.navmeshAgent.remainingDistance <= agent.navmeshAgent.stoppingDistance) //done with path
+        if(agent.navmeshAgent.remainingDistance <= agent.navmeshAgent.stoppingDistance)
         {
             Vector3 point;
-            if (RandomPoint(centrePoint, range, out point)) //pass in our centre point and radius of area
+            if (RandomPoint(centrePoint, range, out point))
             {
-                Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
                 agent.navmeshAgent.SetDestination(point);
             }
         }
-        float distance = (agent.playerTransform.position - agent.navmeshAgent.destination).magnitude;
-        if(distance <agent.AIStat.AttackDistance){
-            Debug.Log("Switching from Patrol to Attack");
-            agent.stateMachine.ChangeState(AIStateId.Attack);
-        }
-        else if(distance < agent.AIStat.DetectionDistance){
+
+        float distanceToPlayer = Vector3.Distance(agent.transform.position, agent.playerTransform.position);
+        
+        if(distanceToPlayer < agent.AIStat.DetectionDistance) {
             Debug.Log("Switching from Patrol to Chase");
             agent.stateMachine.ChangeState(AIStateId.Chase);
         }
-
     }
     public void Exit(AIAgent agent){
 

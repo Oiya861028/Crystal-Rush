@@ -6,53 +6,98 @@ public class AIAgent : MonoBehaviour
     public FSM stateMachine;
     public AIStateId initialState;
     public Transform playerTransform;
-    public NavMeshAgent navmeshAgent;//component
-    public AIStatScriptableObject AIStat;//scriptableObject
+    public Transform currentTarget; // Add this to track current target
+    public NavMeshAgent navmeshAgent;
+    public AIStatScriptableObject AIStat;
     public StormSystem storm;
+    public string[] targetTags = { "Player", "Enemy" }; // Add tags to check for targets
+    public float targetUpdateInterval = 0.5f; // How often to check for new targets
+    private float targetUpdateTimer;
     
+
     public void Start()
     {
         storm = GameObject.FindAnyObjectByType<StormSystem>();
-        //Assigning states
         stateMachine = new FSM(this);
         registerMachineStates();
         stateMachine.ChangeState(initialState);
-        //Assigning variables 
         navmeshAgent = GetComponent<NavMeshAgent>();
-
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         
-
+        // Set initial target as player
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        currentTarget = playerTransform;
+        
+        // Add "Enemy" tag to this AI
+        gameObject.tag = "Enemy";
     }
+
     public void Update()
     {
         navmeshAgent = GetComponent<NavMeshAgent>();
-
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        
         storm = GameObject.FindAnyObjectByType<StormSystem>();
         
-        if(storm == null){
-            Debug.LogError("Did not find any storm script");
+        // Update target periodically
+        targetUpdateTimer += Time.deltaTime;
+        if (targetUpdateTimer >= targetUpdateInterval)
+        {
+            UpdateTarget();
+            targetUpdateTimer = 0f;
         }
-        if(playerTransform==null ){
-            Debug.LogError("Did not find any playerTransform script");
-        }
-        if(playerTransform==null ){
-            Debug.LogError("Did not find any navMeshAgent script");
-        }
-        if(stateMachine==null){
-            Debug.Log("StateMachine is null");
-        }
+
+        // Error checking
+        if(storm == null) Debug.LogError("Did not find any storm script");
+        if(currentTarget == null) Debug.LogError("No target found");
+        if(navmeshAgent == null) Debug.LogError("Did not find any navMeshAgent script");
+        if(stateMachine == null) Debug.Log("StateMachine is null");
+        
         stateMachine.Update();
     }
-    private void registerMachineStates(){
+
+    private void UpdateTarget()
+    {
+        Transform nearestTarget = null;
+        float nearestDistance = float.MaxValue;
+
+        // Check all potential targets
+        foreach (string tag in targetTags)
+        {
+            GameObject[] targets = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject target in targets)
+            {
+                // Skip if it's this AI
+                if (target == gameObject) continue;
+
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestTarget = target.transform;
+                }
+            }
+        }
+
+        // Update current target if we found a closer one
+        if (nearestTarget != null)
+        {
+            currentTarget = nearestTarget;
+        }
+        else
+        {
+            // Fallback to player if no other targets found
+            currentTarget = playerTransform;
+        }
+    }
+
+    private void registerMachineStates()
+    {
         stateMachine.RegisterState(new AIChaseState());
         stateMachine.RegisterState(new AIPatrolState());
         stateMachine.RegisterState(new AIAttackState());
         stateMachine.RegisterState(new AIFleeState());
     }
-    public void die(){
+
+    public void die()
+    {
         playerAliveCount counter = FindFirstObjectByType<playerAliveCount>();
         counter.updateCounter();
         Destroy(gameObject);

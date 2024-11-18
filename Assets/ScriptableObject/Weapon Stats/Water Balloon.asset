@@ -17,4 +17,4 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   bulletSpeed: 5
   WeaponModel: {fileID: 0}
-  projectileModel: {fileID: 0}
+  projectileModel: {fileID: 11400000, guid: d7d99eedfc528464e98a0e792464a0dd, type: 2}
