@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Water Balloon
+  m_Script: {fileID: 11500000, guid: 36cd4d713a237874db2c479bc9cba9e9, type: 3}
+  m_Name: ProjectileStat
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 8225460515675447244, guid: 7ecc79d45b8dc4210afa841ad7779a92, type: 3}
+  hitEffect: {fileID: 0}
   baseDamage: 10
+  projectileSpeed: 100
   projectileName: 

@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1101,11 +1102,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6145310337079978769, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000034043524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6145310337079978769, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000022861212
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6905550753671903604, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1197,7 +1198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8065631313808199918, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.81702775
+      value: 0.8170278
       objectReference: {fileID: 0}
     - target: {fileID: 8065631313808199918, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1205,11 +1206,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8065631313808199918, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000018799184
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8065631313808199918, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000013267088
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8066926088942893484, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.y
