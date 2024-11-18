@@ -763,9 +763,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1877941903}
-        m_TargetAssemblyTypeName: PlayAgainButton, Assembly-CSharp
-        m_MethodName: PlayAgain
+      - m_Target: {fileID: 1877941905}
+        m_TargetAssemblyTypeName: PlayAgain, Assembly-CSharp
+        m_MethodName: LoadOpeningScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -835,7 +835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1877941904}
-  - component: {fileID: 1877941903}
+  - component: {fileID: 1877941905}
   m_Layer: 0
   m_Name: PlayAgainButton
   m_TagString: Untagged
@@ -843,19 +843,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1877941903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877941902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 543454be3ea97144d8282ed415db5cc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openingSceneName: OpeningScene
 --- !u!4 &1877941904
 Transform:
   m_ObjectHideFlags: 0
@@ -871,6 +858,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1877941905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877941902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef375304e5d5af4b84055d2d455e378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2020383467
 GameObject:
   m_ObjectHideFlags: 0
