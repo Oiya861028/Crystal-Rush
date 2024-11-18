@@ -1,65 +1,70 @@
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering.Universal.Internal;
-using UnityEngine.TextCore.Text;
+
 public class AIController : MonoBehaviour
 {
-    //References
-    
-    [SerializeField] private BasicStatScriptableObject AIStat;//Stat Data Bank for Weak AI
-    
-    
+    // References
+    [SerializeField] private BasicStatScriptableObject AIStat; // Stat Data Bank for Weak AI
     [SerializeField] private Weapon WeaponStat;
-    private Transform player; //player location
+    
+    private Transform player; // Player location
     private NavMeshAgent agent;
     private Animator animator;
-    private Vector3 velocity;
-    // Start is called before the first frame update
+    private float lastBulletTime;
+    private float playerDistance;
 
-    void Start() {
+    // Event to notify when the AI is destroyed
+    public delegate void AIDestroyedHandler();
+    public event AIDestroyedHandler OnAIDestroyed;
+
+    void Start()
+    {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
-    // Update is called once per frame
+
     void Update()
-    { 
-        
+    {
         animator.SetFloat("Speed", agent.velocity.magnitude);
         playerDistance = Vector3.Distance(transform.position, player.position);
-        if (playerDistance < AIStat.DetectionDistance)
+
+        if (playerDistance < AIStat.AttackDistance)
         {
             AttackPlayer();
         }
-        else if (playerDistance < AIStat.AttackDistance) {
+        else if (playerDistance < AIStat.DetectionDistance)
+        {
             ChasePlayer();
         }
-
-
     }
-    public void setPlayer(Transform p){
+
+    public void setPlayer(Transform p)
+    {
         player = p;
     }
-    //Counter variables
-    private float lastBulletTime;
-    private float sprintCD;
-    private float playerDistance;
+
     void AttackPlayer()
     {
-        if(Time.deltaTime-lastBulletTime > WeaponStat.reloadTime){
+        if (Time.time - lastBulletTime > WeaponStat.reloadTime)
+        {
+            lastBulletTime = Time.time;
             GameObject projectile = Instantiate(WeaponStat.projectileModel.model, transform.position, Quaternion.identity);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             rb.velocity = (player.position - transform.position).normalized * WeaponStat.bulletSpeed;
 
-            Destroy(projectile, 2f);  // Destroy the projectile after 2 seconds
-        }
-        else{
-            lastBulletTime+= Time.deltaTime;
+            Destroy(projectile, 2f); // Destroy the projectile after 2 seconds
         }
     }
-    void ChasePlayer(){
-        //move toward player
+
+    void ChasePlayer()
+    {
+        // Move toward player
         agent.destination = player.position;
     }
 
+    void OnDestroy()
+    {
+        // Notify listeners (e.g., AISpawner) when the AI is destroyed
+        OnAIDestroyed?.Invoke();
+    }
 }
