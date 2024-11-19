@@ -18,7 +18,7 @@ MonoBehaviour:
   JumpForce: 10
   Model: {fileID: 8730691537894468708, guid: d34fe65a2b10b354283bfb13a6cfbb54, type: 3}
   projectileData: {fileID: 11400000, guid: d7d99eedfc528464e98a0e792464a0dd, type: 2}
-  DetectionDistance: 20
-  AttackDistance: 10
+  DetectionDistance: 70
+  AttackDistance: 40
   minTime: 0.1
   minDistance: 1
