@@ -17,6 +17,7 @@ public class RaycastWeapon : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public ParticleSystem hitEffect;
     public TrailRenderer TraceEffect;
+    public AudioClip shootingSound;
     public Transform RaycastOrigin;
     public Transform RaycastDestination;
     public bool isFiring = false;
@@ -51,7 +52,7 @@ public class RaycastWeapon : MonoBehaviour
         isFiring = true;
         timeSincegunFired = 0f;
         FireBullet();
-
+    
     }
     public void UpdateFiring(float deltaTime) {
         timeSincegunFired += deltaTime;
