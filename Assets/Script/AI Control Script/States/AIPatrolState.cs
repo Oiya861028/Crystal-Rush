@@ -24,6 +24,16 @@ public class AIPatrolState : AIState
     
     public void Update(AIAgent agent)
     {
+        
+
+        float distanceToPlayer = Vector3.Distance(agent.transform.position, agent.playerTransform.position);
+        
+        if(distanceToPlayer < agent.AIStat.DetectionDistance) {
+            Debug.Log("Switching from Patrol to Chase");
+            agent.stateMachine.ChangeState(AIStateId.Chase);
+        }
+        detectOtherAgent(agent);
+        //continue patrol
         if(agent.navmeshAgent.remainingDistance <= agent.navmeshAgent.stoppingDistance)
         {
             Vector3 point;
@@ -32,16 +42,28 @@ public class AIPatrolState : AIState
                 agent.navmeshAgent.SetDestination(point);
             }
         }
-
-        float distanceToPlayer = Vector3.Distance(agent.transform.position, agent.playerTransform.position);
-        
-        if(distanceToPlayer < agent.AIStat.DetectionDistance) {
-            Debug.Log("Switching from Patrol to Chase");
-            agent.stateMachine.ChangeState(AIStateId.Chase);
-        }
     }
     public void Exit(AIAgent agent){
 
+    }
+    private void detectOtherAgent(AIAgent agent){
+        float sphereRadius = 5.0f; // Radius of the sphere for detection
+        float detectionDistance = agent.AIStat.DetectionDistance;
+        RaycastHit[] hits;
+
+        // Cast a sphere in all directions
+        hits = Physics.SphereCastAll(agent.transform.position, sphereRadius, Vector3.forward, detectionDistance);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.CompareTag("Enemy")) // Assuming other agents have the tag "AIAgent"
+            {
+                Debug.Log("Detected another AI agent with sphere cast");
+                // Implement behavior when another AI agent is detected
+                Debug.Log("Switching from Patrol to Chase");
+                agent.stateMachine.ChangeState(AIStateId.Chase);
+            }
+        }
     }
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
