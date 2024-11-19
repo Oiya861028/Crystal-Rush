@@ -64,6 +64,7 @@ Transform:
   - {fileID: 6681204152330774371}
   - {fileID: 3908626538604294522}
   - {fileID: 6660597929915905936}
+  - {fileID: 457655063277297872}
   m_Father: {fileID: 2956470931568116964}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &426234064191328518
@@ -2251,6 +2252,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2408505907551757490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7326082622618006818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 457655063277297872}
+  m_Layer: 3
+  m_Name: LeftHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &457655063277297872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7326082622618006818}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 311178727368341229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7349209668188679658
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,9 +2592,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialState: 0
   playerTransform: {fileID: 0}
+  currentTarget: {fileID: 0}
   navmeshAgent: {fileID: 1316494773623369937}
   AIStat: {fileID: 11400000, guid: 35769b11795ebe5458168700c96a5038, type: 2}
   storm: {fileID: 0}
+  targetTags:
+  - Player
+  - Enemy
+  targetUpdateInterval: 0.5
 --- !u!114 &4489560866000185178
 MonoBehaviour:
   m_ObjectHideFlags: 0

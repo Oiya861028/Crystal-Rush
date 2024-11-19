@@ -30,7 +30,7 @@ public class AISpawner : MonoBehaviour
             GameObject attachPoint = GetWeaponAttachPoint(i);
             if (attachPoint != null && WeaponStat != null)
             {
-                Instantiate(WeaponStat.Model, attachPoint.transform.position, attachPoint.transform.rotation, attachPoint.transform);
+                Instantiate(WeaponStat.WeaponModel, attachPoint.transform.position, attachPoint.transform.rotation, attachPoint.transform);
             }
         }
     }
