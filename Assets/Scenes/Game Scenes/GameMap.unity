@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -363,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialStormRadius: 600
-  finalStormRadius: 50
+  finalStormRadius: 0
   stormShrinkTime: 300
   damagePerSecond: 2
   damageTickRate: 1
@@ -1064,6 +1063,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.000000034367943
       objectReference: {fileID: 0}
+    - target: {fileID: 5054763360444315469, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
+      propertyPath: dmg
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5054763360444315469, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
+      propertyPath: fireRate
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5163786268873459984, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: healthBar
       value: 
@@ -1102,11 +1109,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6145310337079978769, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.000000018111935
       objectReference: {fileID: 0}
     - target: {fileID: 6145310337079978769, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.0000000121626895
       objectReference: {fileID: 0}
     - target: {fileID: 6905550753671903604, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1142,11 +1149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7268334410611241290, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8429448
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7268334410611241290, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.53800005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7372998192994538361, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: jumpForce
@@ -1206,11 +1213,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8065631313808199918, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.000000017824947
       objectReference: {fileID: 0}
     - target: {fileID: 8065631313808199918, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.000000012579541
       objectReference: {fileID: 0}
     - target: {fileID: 8066926088942893484, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.y

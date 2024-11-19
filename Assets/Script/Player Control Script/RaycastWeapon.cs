@@ -20,8 +20,8 @@ public class RaycastWeapon : MonoBehaviour
     public Transform RaycastOrigin;
     public Transform RaycastDestination;
     public bool isFiring = false;
-    public int fireRate = 30;
-    public int dmg = 10;
+    public float fireRate = 30;
+    public float dmg = 10;
     public float bulletSpeed = 1000.0f;
     public float bulletDrop = 0.0f;
     public float maxLifeTime = 3.0f;
