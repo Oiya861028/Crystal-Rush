@@ -60,15 +60,28 @@ public class AIChaseState : AIState
         Collider[] hitColliders = Physics.OverlapSphere(agent.transform.position, agent.AIStat.DetectionDistance);
         float closestDistance = float.MaxValue;
         Transform closestTarget = null;
+        Transform closestPlayer = null;
+        float closestPlayerDistance = float.MaxValue;
 
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider == null || hitCollider.gameObject == agent.gameObject) 
                 continue;
 
-            if (hitCollider.CompareTag("Player") || hitCollider.CompareTag("Enemy"))
+            float distance = Vector3.Distance(agent.transform.position, hitCollider.transform.position);
+            
+            // Check for player first
+            if (hitCollider.CompareTag("Player"))
             {
-                float distance = Vector3.Distance(agent.transform.position, hitCollider.transform.position);
+                if (distance < closestPlayerDistance && distance > 0.1f)
+                {
+                    closestPlayerDistance = distance;
+                    closestPlayer = hitCollider.transform;
+                }
+            }
+            // If not a player, check for other enemies
+            else if (hitCollider.CompareTag("Enemy"))
+            {
                 if (distance < closestDistance && distance > 0.1f)
                 {
                     closestDistance = distance;
@@ -77,7 +90,16 @@ public class AIChaseState : AIState
             }
         }
 
-        if (closestTarget != null)
+        // Prioritize player if found within range
+        if (closestPlayer != null)
+        {
+            if (agent.currentTarget == null || !agent.currentTarget.CompareTag("Player"))
+            {
+                agent.currentTarget = closestPlayer;
+            }
+        }
+        // Otherwise use closest enemy if we found one
+        else if (closestTarget != null && closestTarget != agent.currentTarget)
         {
             agent.currentTarget = closestTarget;
         }
