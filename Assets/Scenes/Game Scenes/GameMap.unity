@@ -363,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialStormRadius: 600
   finalStormRadius: 0
-  stormShrinkTime: 100
+  stormShrinkTime: 300
   damagePerSecond: 2
   damageTickRate: 1
   stormColor: {r: 0.5, g: 0, b: 1, a: 0.5}
@@ -1134,6 +1134,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3530174224524917714, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
+      propertyPath: turningSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4717471140160680211, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.19000006
@@ -1256,11 +1260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7268334410611241290, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8429448
       objectReference: {fileID: 0}
     - target: {fileID: 7268334410611241290, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.53800005
       objectReference: {fileID: 0}
     - target: {fileID: 7372998192994538361, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: jumpForce

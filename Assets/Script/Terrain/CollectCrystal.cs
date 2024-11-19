@@ -13,8 +13,8 @@ public class CollectCrystal : MonoBehaviour
     void Update(){
         float distance = Vector3.Distance(playerTransform.position, transform.position);
         if(distance<detectRange){
-            weapon.fireRate+=.5f;
-            weapon.dmg+= .5f;
+            weapon.fireRate+=.3f;
+            weapon.dmg+= .3f;
             Debug.Log("Destroyed");
             Destroy(gameObject);
         }
