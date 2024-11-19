@@ -1,41 +1,138 @@
 using System;
 using UnityEngine;
 
+
 public class AIAttackState : AIState
 {
     private float attackCooldown = 1f;
     private float lastAttackTime = 0f;
-    private float switchToChaseBuffer = 3f;
-    
+    private float targetCheckInterval = 0.5f;
+    private float targetCheckTimer = 0f;
+    private float maxAttackDuration = 3f;
+    private float attackStateTimer = 0f;
+    private float minAttackDistance = 3f; // Minimum distance to maintain
+
     public void Update(AIAgent agent)
     {
-        if (agent == null || agent.currentTarget == null) return;
+        // Always check timer first
+        attackStateTimer += Time.deltaTime;
+        if (attackStateTimer >= maxAttackDuration)
+        {
+            agent.stateMachine.ChangeState(AIStateId.Chase);
+            return;
+        }
+
+        // Regular target checking
+        targetCheckTimer += Time.deltaTime;
+        if (targetCheckTimer >= targetCheckInterval)
+        {
+            FindNewTarget(agent);
+            targetCheckTimer = 0f;
+        }
+
+        if (agent.currentTarget == null)
+        {
+            FindNewTarget(agent);
+            if (agent.currentTarget == null)
+            {
+                agent.stateMachine.ChangeState(AIStateId.Patrol);
+            }
+            return;
+        }
 
         float distanceToTarget = Vector3.Distance(agent.transform.position, agent.currentTarget.position);
-        
-        // Only attack if within range
-        if (distanceToTarget <= agent.AIStat.AttackDistance)
+
+        // Back up if too close
+        if (distanceToTarget < minAttackDistance)
         {
-            Vector3 directionToTarget = (agent.currentTarget.position - agent.transform.position).normalized;
+            Vector3 directionAway = (agent.transform.position - agent.currentTarget.position).normalized;
+            Vector3 backupPosition = agent.transform.position + directionAway * (minAttackDistance - distanceToTarget);
+            agent.navmeshAgent.SetDestination(backupPosition);
+            return;
+        }
+
+        // Chase if too far
+        if (distanceToTarget > agent.AIStat.AttackDistance)
+        {
+            agent.stateMachine.ChangeState(AIStateId.Chase);
+            return;
+        }
+
+        // Always face target
+        Vector3 targetDirection = (agent.currentTarget.position - agent.transform.position).normalized;
+        targetDirection.y = 0f;
+        agent.transform.rotation = Quaternion.LookRotation(targetDirection);
+
+        // Attack when cooldown ready
+        if (Time.time >= lastAttackTime + attackCooldown)
+        {
+            AttackTarget(agent);
+            lastAttackTime = Time.time;
+
+            // Smaller random movement after shooting to maintain spacing
+            Vector3 randomOffset = UnityEngine.Random.insideUnitSphere * 0.5f;
+            randomOffset.y = 0;
+            Vector3 targetPos = agent.transform.position + randomOffset;
+            agent.navmeshAgent.SetDestination(targetPos);
+        }
+    }
+
+    private void FindNewTarget(AIAgent agent)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(agent.transform.position, agent.AIStat.DetectionDistance);
+        float closestDistance = float.MaxValue;
+        Transform closestTarget = null;
+        Transform closestPlayer = null;
+        float closestPlayerDistance = float.MaxValue;
+
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider == null || hitCollider.gameObject == agent.gameObject) 
+                continue;
+
+            float distance = Vector3.Distance(agent.transform.position, hitCollider.transform.position);
             
-            // Check if we have line of sight
-            RaycastHit hit;
-            if (Physics.Raycast(agent.transform.position + Vector3.up, directionToTarget, out hit, agent.AIStat.AttackDistance))
+            // Check for player first
+            if (hitCollider.CompareTag("Player"))
             {
-                // If we hit the target and attack is not on cooldown
-                if (hit.transform == agent.currentTarget && Time.time >= lastAttackTime + attackCooldown)
+                if (distance < closestPlayerDistance && distance > 0.1f)
                 {
-                    ShootProjectile(agent, directionToTarget);
-                    lastAttackTime = Time.time;
+                    closestPlayerDistance = distance;
+                    closestPlayer = hitCollider.transform;
+                }
+            }
+            // If not a player, check for other enemies
+            else if (hitCollider.CompareTag("Enemy"))
+            {
+                if (distance < closestDistance && distance > 0.1f)
+                {
+                    closestDistance = distance;
+                    closestTarget = hitCollider.transform;
                 }
             }
         }
-        
-        // Switch to chase if target gets too far
-        if (distanceToTarget > agent.AIStat.AttackDistance + switchToChaseBuffer)
+
+        // Prioritize player if found within range
+        if (closestPlayer != null)
         {
-            agent.stateMachine.ChangeState(AIStateId.Chase);
+            if (agent.currentTarget == null || !agent.currentTarget.CompareTag("Player"))
+            {
+                agent.currentTarget = closestPlayer;
+            }
         }
+        // Otherwise use closest enemy if we found one
+        else if (closestTarget != null && closestTarget != agent.currentTarget)
+        {
+            agent.currentTarget = closestTarget;
+        }
+    }
+
+    private void AttackTarget(AIAgent agent)
+    {
+        if (agent.currentTarget == null) return;
+        
+        Vector3 direction = (agent.currentTarget.position - agent.transform.position).normalized;
+        ShootProjectile(agent, direction);
     }
 
     private void ShootProjectile(AIAgent agent, Vector3 direction)
@@ -47,19 +144,16 @@ public class AIAttackState : AIState
                 Debug.LogError("Projectile data or model is missing!");
                 return;
             }
-            Debug.Log("shooting a bullet");
-            // Calculate spawn position (slightly in front and above the AI)
+
             Vector3 spawnOffset = (direction * 1f) + (Vector3.up * 1.5f);
             Vector3 spawnPosition = agent.transform.position + spawnOffset;
 
-            // Instantiate the projectile
             GameObject projectile = UnityEngine.Object.Instantiate(
                 agent.AIStat.projectileData.model, 
                 spawnPosition, 
-                Quaternion.identity
+                Quaternion.LookRotation(direction)
             );
 
-            // Add necessary components if they don't exist
             if (!projectile.GetComponent<Collider>())
             {
                 SphereCollider collider = projectile.AddComponent<SphereCollider>();
@@ -67,27 +161,23 @@ public class AIAttackState : AIState
                 collider.radius = 0.25f;
             }
 
-            // Ensure it has the ProjectileController
             ProjectileController controller = projectile.GetComponent<ProjectileController>();
             if (controller == null)
             {
                 controller = projectile.AddComponent<ProjectileController>();
             }
 
-            // Tag it as a projectile
             projectile.tag = "Projectile";
 
-            // Initialize the projectile
             controller.Initialize(
                 direction,
                 agent.AIStat.projectileData.projectileSpeed,
                 agent.AIStat.projectileData.baseDamage
             );
 
-            // Destroy after a delay
             UnityEngine.Object.Destroy(projectile, 5f);
         }
-        catch (Exception e)
+        catch (System.Exception e)
         {
             Debug.LogError($"Error shooting projectile: {e.Message}");
         }
@@ -100,7 +190,9 @@ public class AIAttackState : AIState
 
     public void Enter(AIAgent agent)
     {
-        lastAttackTime = 0f; // Reset cooldown when entering state
+        lastAttackTime = 0f;
+        attackStateTimer = 0f;
+        targetCheckTimer = 0f;
     }
 
     public void Exit(AIAgent agent)

@@ -11,79 +11,91 @@ public class AIPatrolState : AIState
 
     public float range; //radius of sphere
     public StormSystem storm;
-
-    public Vector3 centrePoint; //centre of the area the agent wants to move around in
-    //instead of centrePoint you can set it as the transform of the agent if you don't care about a specific area
+    public Vector3 centrePoint;
 
     public void Enter(AIAgent agent)
     {
-        centrePoint = Vector3.zero;//the AI will patrol with the center of map as center
+        centrePoint = Vector3.zero;
         range = agent.storm.currentStormRadius;
     }
 
-    
     public void Update(AIAgent agent)
     {
-        
+        // Check for nearby targets (both player and other AIs)
+        CheckForTargets(agent);
 
-        float distanceToPlayer = Vector3.Distance(agent.transform.position, agent.playerTransform.position);
-        
-        if(distanceToPlayer < agent.AIStat.DetectionDistance) {
-            Debug.Log("Switching from Patrol to Chase");
-            agent.stateMachine.ChangeState(AIStateId.Chase);
-        }
-        detectOtherAgent(agent);
-        //Detect Storm
-        float distanceFromCenter = Vector3.Distance(
-                new Vector3(agent.transform.position.x, 0, agent.transform.position.z), 
-                Vector3.zero
-            );
-            if (distanceFromCenter > agent.storm.currentStormRadius)
-            {
-                agent.stateMachine.ChangeState(AIStateId.MoveInward);
-            }
-        //continue patrol
         if(agent.navmeshAgent.remainingDistance <= agent.navmeshAgent.stoppingDistance)
         {
             Vector3 point;
             if (RandomPoint(centrePoint, range, out point))
             {
+                Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
                 agent.navmeshAgent.SetDestination(point);
             }
         }
     }
-    public void Exit(AIAgent agent){
 
-    }
-    private void detectOtherAgent(AIAgent agent){
-        float sphereRadius = 5.0f; // Radius of the sphere for detection
-        float detectionDistance = agent.AIStat.DetectionDistance;
-        RaycastHit[] hits;
+    private void CheckForTargets(AIAgent agent)
+    {
+        // First check for any nearby AIs or player
+        Collider[] hitColliders = Physics.OverlapSphere(agent.transform.position, agent.AIStat.DetectionDistance);
+        float closestDistance = float.MaxValue;
+        Transform closestTarget = null;
 
-        // Cast a sphere in all directions
-        hits = Physics.SphereCastAll(agent.transform.position, sphereRadius, Vector3.forward, detectionDistance);
-
-        foreach (RaycastHit hit in hits)
+        foreach (var hitCollider in hitColliders)
         {
-            if (hit.transform.CompareTag("Enemy")) // Assuming other agents have the tag "AIAgent"
+            // Skip self
+            if (hitCollider.gameObject == agent.gameObject) continue;
+
+            // Check if it's a valid target (player or enemy)
+            if (hitCollider.CompareTag("Player") || hitCollider.CompareTag("Enemy"))
             {
-                Debug.Log("Detected another AI agent with sphere cast");
-                // Implement behavior when another AI agent is detected
-                Debug.Log("Switching from Patrol to Chase");
+                float distance = Vector3.Distance(agent.transform.position, hitCollider.transform.position);
+                if (distance < closestDistance)
+                {
+                    // Do a raycast to check if we have line of sight
+                    RaycastHit hit;
+                    Vector3 directionToTarget = (hitCollider.transform.position - agent.transform.position).normalized;
+                    if (Physics.Raycast(agent.transform.position + Vector3.up, directionToTarget, out hit, agent.AIStat.DetectionDistance))
+                    {
+                        if (hit.collider == hitCollider)
+                        {
+                            closestDistance = distance;
+                            closestTarget = hitCollider.transform;
+                        }
+                    }
+                }
+            }
+        }
+
+        // If we found a target, update the agent's current target and switch state
+        if (closestTarget != null)
+        {
+            agent.currentTarget = closestTarget;
+            if (closestDistance <= agent.AIStat.AttackDistance)
+            {
+                Debug.Log($"Found target {closestTarget.name} within attack range, switching to Attack");
+                agent.stateMachine.ChangeState(AIStateId.Attack);
+            }
+            else
+            {
+                Debug.Log($"Found target {closestTarget.name}, switching to Chase");
                 agent.stateMachine.ChangeState(AIStateId.Chase);
             }
         }
     }
+
+    public void Exit(AIAgent agent)
+    {
+    }
+
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
-
-        Vector3 randomPoint = center + Random.insideUnitSphere * range; //random point in a sphere 
-        randomPoint.y = center.y+20;//limit the height to be 20 units above center of map
+        Vector3 randomPoint = center + UnityEngine.Random.insideUnitSphere * range;
+        randomPoint.y = center.y + 20;
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.AllAreas)) //documentation: https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html
+        if (NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.AllAreas))
         { 
-            //the 10f is the max distance from the random point to a point on the navmesh, might want to increase if range is big
-            //or add a for loop like in the documentation
             result = hit.position;
             return true;
         }

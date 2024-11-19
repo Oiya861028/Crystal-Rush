@@ -6,6 +6,7 @@ public class ProjectileController : MonoBehaviour
     private float speed;
     private Vector3 direction;
     private bool hasBeenInitialized = false;
+    private Vector3 lastPosition;
 
     public void Initialize(Vector3 dir, float projSpeed, float projDamage)
     {
@@ -13,55 +14,67 @@ public class ProjectileController : MonoBehaviour
         speed = projSpeed;
         damage = projDamage;
         hasBeenInitialized = true;
-        
+        lastPosition = transform.position;
         transform.forward = direction;
     }
 
     void FixedUpdate()
     {
         if (!hasBeenInitialized) return;
-        transform.position += direction * speed * Time.deltaTime;
+
+        Vector3 newPosition = transform.position + direction * speed * Time.deltaTime;
+        
+        // Cast a ray from last position to new position
+        float distance = Vector3.Distance(lastPosition, newPosition);
+        Ray ray = new Ray(lastPosition, direction);
+        RaycastHit hit;
+        
+        if (Physics.Raycast(ray, out hit, distance))
+        {
+            HandleHit(hit);
+            Destroy(gameObject);
+            return;
+        }
+        
+        // Update position if no hit
+        transform.position = newPosition;
+        lastPosition = newPosition;
     }
 
-    void OnCollisionEnter(Collision other)
+    void HandleHit(RaycastHit hit)
     {
-        Debug.Log("Hit "+ other);
-        // Ignore collisions with the shooter and other projectiles
-        if (other.collider.Equals("Projectile")) return;
+        // Ignore other projectiles
+        if (hit.collider.CompareTag("Projectile")) return;
         
-        // If we hit something, try to damage it
-        bool damageDealt = false;
+        Debug.Log($"Projectile hit: {hit.collider.gameObject.name} with tag: {hit.collider.tag}");
 
         // Check for player
-        if(other.collider.Equals("Player")){
-            PlayerHealth playerHealth = other.collider.GetComponent<PlayerHealth>();
+        if(hit.collider.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
-                damageDealt = true;
                 Debug.Log($"Hit player for {damage} damage");
             }
+            else
+            {
+                Debug.LogWarning("Player hit but no PlayerHealth component found!");
+            }
         }
-
         // Check for AI
-        AIHitBox aiHitBox = other.collider.GetComponent<AIHitBox>();
-        if (aiHitBox != null && aiHitBox.health != null)
+        else if(hit.collider.CompareTag("Enemy"))
         {
-            aiHitBox.health.TakeDamage(damage);
-            damageDealt = true;
-            Debug.Log($"Hit AI for {damage} damage");
+            AIHitBox aiHitBox = hit.collider.GetComponent<AIHitBox>();
+            if (aiHitBox != null && aiHitBox.health != null)
+            {
+                aiHitBox.health.TakeDamage(damage);
+                Debug.Log($"Hit AI for {damage} damage");
+            }
+            else
+            {
+                Debug.LogWarning("Enemy hit but no AIHitBox/health component found!");
+            }
         }
-
-        // // Alternative way to find AI health
-        // AIHealth aiHealth = other.GetComponent<AIHealth>();
-        // if (!damageDealt && aiHealth != null)
-        // {
-        //     aiHealth.TakeDamage(damage);
-        //     damageDealt = true;
-        //     Debug.Log($"Hit AI directly for {damage} damage");
-        // }
-
-        // Destroy the projectile when it hits anything
-        Destroy(gameObject);
     }
 }
