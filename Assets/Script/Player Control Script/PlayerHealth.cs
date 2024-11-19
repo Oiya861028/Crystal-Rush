@@ -1,9 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
+using UnityEditor;
 public class PlayerHealth : MonoBehaviour
 {
+    public string losingSceneName;
     public float Maxhealth;
     private float currentHealth;
     public Slider healthBar;
@@ -22,9 +24,10 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Player has died!");
             animator.SetBool("isPlayerAlive", false);
-            Destroy(gameObject);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene(losingSceneName);
             // Load the losing scene
-            FindFirstObjectByType<SceneController>().LoadLosingScene();
         }
     }
 }

@@ -803,6 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d08cd6909a7dbc4e90fd59e26f9007f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextSceneName: WinningScene
   AliveAIs: 99
 --- !u!1 &1560904473
 GameObject:
@@ -1103,11 +1104,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2077734491421618921, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.5019783
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2077734491421618921, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.438918
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 2629850432133756381, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.y
@@ -1173,6 +1174,14 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1509522006}
+    - target: {fileID: 5163786268873459984, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
+      propertyPath: nextSceneName
+      value: LosingScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163786268873459984, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
+      propertyPath: losingSceneName
+      value: LosingScene
+      objectReference: {fileID: 0}
     - target: {fileID: 5285581233495615047, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1247,11 +1256,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7268334410611241290, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8429448
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7268334410611241290, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.53800005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7372998192994538361, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: jumpForce
@@ -1319,19 +1328,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8066926088942893484, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.5019783
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8066926088942893484, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.438918
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 8145076744503164582, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.5019783
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8145076744503164582, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.438918
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 9104868709720478968, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
       propertyPath: m_LocalPosition.y
