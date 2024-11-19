@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.VFX;
+using System;
 
 public class StormSystem : MonoBehaviour
 {
@@ -210,7 +211,29 @@ public class StormSystem : MonoBehaviour
         while (isStormActive)
         {
             CheckPlayersInStorm();
+            CheckAIInStorm();
             yield return new WaitForSeconds(damageTickRate);
+        }
+    }
+
+    private void CheckAIInStorm()
+    {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+        
+        foreach (GameObject target in targets)
+        {
+            float distanceFromCenter = Vector3.Distance(
+                new Vector3(target.transform.position.x, 0, target.transform.position.z), 
+                Vector3.zero
+            );
+            if (distanceFromCenter > currentStormRadius)
+            {
+                AIHealth health = target.GetComponent<AIHealth>();
+                if (health != null)
+                {
+                    health.TakeDamage(damagePerSecond * damageTickRate);
+                }
+            }
         }
     }
 

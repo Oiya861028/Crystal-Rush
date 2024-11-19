@@ -6,6 +6,7 @@ public enum AIStateId{
     Chase, 
     Attack, 
     Flee,
+    MoveInward,
 }
 public interface AIState {
     AIStateId GetId();

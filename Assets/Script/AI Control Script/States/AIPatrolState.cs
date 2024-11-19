@@ -33,6 +33,15 @@ public class AIPatrolState : AIState
             agent.stateMachine.ChangeState(AIStateId.Chase);
         }
         detectOtherAgent(agent);
+        //Detect Storm
+        float distanceFromCenter = Vector3.Distance(
+                new Vector3(agent.transform.position.x, 0, agent.transform.position.z), 
+                Vector3.zero
+            );
+            if (distanceFromCenter > agent.storm.currentStormRadius)
+            {
+                agent.stateMachine.ChangeState(AIStateId.MoveInward);
+            }
         //continue patrol
         if(agent.navmeshAgent.remainingDistance <= agent.navmeshAgent.stoppingDistance)
         {
