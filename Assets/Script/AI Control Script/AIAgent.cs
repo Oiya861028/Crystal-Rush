@@ -13,7 +13,6 @@ public class AIAgent : MonoBehaviour
     public string[] targetTags = { "Player", "Enemy" }; // Add tags to check for targets
     public float targetUpdateInterval = 0.5f; // How often to check for new targets
     private float targetUpdateTimer;
-    
 
     public void Start()
     {
@@ -58,13 +57,11 @@ public class AIAgent : MonoBehaviour
         Transform nearestTarget = null;
         float nearestDistance = float.MaxValue;
 
-        // Check all potential targets
         foreach (string tag in targetTags)
         {
             GameObject[] targets = GameObject.FindGameObjectsWithTag(tag);
             foreach (GameObject target in targets)
             {
-                // Skip if it's this AI
                 if (target == gameObject) continue;
 
                 float distance = Vector3.Distance(transform.position, target.transform.position);
@@ -76,15 +73,23 @@ public class AIAgent : MonoBehaviour
             }
         }
 
-        // Update current target if we found a closer one
         if (nearestTarget != null)
         {
             currentTarget = nearestTarget;
+            
+            if (nearestDistance > AIStat.DetectionDistance)
+            {
+                stateMachine.ChangeState(AIStateId.Patrol);
+            }
+            else if (nearestDistance > AIStat.AttackDistance)
+            {
+                stateMachine.ChangeState(AIStateId.Chase);
+            }
         }
         else
         {
-            // Fallback to player if no other targets found
             currentTarget = playerTransform;
+            stateMachine.ChangeState(AIStateId.Patrol);
         }
     }
 
@@ -98,8 +103,20 @@ public class AIAgent : MonoBehaviour
 
     public void die()
     {
-        playerAliveCount counter = FindFirstObjectByType<playerAliveCount>();
-        counter.updateCounter();
-        Destroy(gameObject);
+    playerAliveCount counter = FindFirstObjectByType<playerAliveCount>();
+    counter.updateCounter();
+    
+    // Find all AIs that might be targeting this one
+    AIAgent[] allAIs = FindObjectsOfType<AIAgent>();
+    foreach(AIAgent ai in allAIs)
+    {
+        // If an AI was targeting this one, clear its target
+        if(ai.currentTarget == this.transform)
+        {
+            ai.currentTarget = null;
+        }
     }
+    
+    Destroy(gameObject);
+}
 }
